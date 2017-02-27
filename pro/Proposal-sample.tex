@@ -1,0 +1,115 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} 
+
+\usepackage[T1]{fontenc} 
+\usepackage{fourier}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsfonts,amsthm} 
+\usepackage{hyperref}
+\usepackage{lastpage}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{sectsty} 
+\allsectionsfont{\normalfont\scshape} 
+
+\usepackage{fancyhdr}
+
+%----------------------------------------------------------------------------------------
+%	HEADERS & FOOTERS
+%----------------------------------------------------------------------------------------
+
+\fancypagestyle{firststyle}
+{
+	\fancyhead{}
+	\fancyfoot[L]{} 
+	\fancyfoot[C]{} 
+	\fancyfoot[R]{Page~\thepage~of~\pageref{LastPage}}
+	\renewcommand{\headrulewidth}{0pt} 
+	\renewcommand{\footrulewidth}{0.4pt} 
+	\setlength{\headheight}{13.6pt}
+}
+\fancypagestyle{secondstyle}
+{
+	\fancyhead[L]{MCAST IICT - University College}
+	\fancyhead[C]{}
+	\fancyhead[R]{2016/2017}
+	\fancyfoot[L]{IICT6098 - 2\textsuperscript{nd} Year Project}
+	\fancyfoot[C]{IT-SWD-6.2B - Kim Scicluna Proposal} 
+	\fancyfoot[R]{Page~\thepage~of~\pageref{LastPage}}
+	\renewcommand{\headrulewidth}{0.4pt} 
+	\renewcommand{\footrulewidth}{0.4pt} 
+	\setlength{\headheight}{13.6pt} 
+}
+\pagestyle{secondstyle} 
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+
+\title{	
+\normalfont \normalsize 
+\textsc{MCAST University College, \\Institute of Information Technology and Communication Technology} \\ [25pt] 
+\horrule{0.5pt} \\[0.4cm]
+\huge B.Sc. (Hons.) 2\textsuperscript{nd} Year Project - Initial proposal
+\horrule{2pt} \\[0.5cm] 
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Personal Details}
+
+\begin{tabbing}
+\hspace*{2cm}\=\hspace*{3cm}\= \kill
+\textbf{Full Name:} \> Kim Scicluna\\
+\textbf{Group:} \> IT-SWD-6.1B\\
+\textbf{Email:} \> kim.scicluna.a106280@mcast.edu.mt\\
+\end{tabbing}
+
+\section{Project Details}
+
+\textbf{Research Question / Aim:} Identifying and implementing an efficient Battleship AI algorithm by using educated guessing and a probabilistic approach.\\\\
+\textbf{Objectives:} 
+\begin{enumerate}
+	\item \textbf{Research} different techniques that can reduce the amount of shots it takes to win the game.
+	\item \textbf{Develop} a prototype that uses two basic techniques based on guessing and has the ability to play the game for a given number of times to gather data.
+	\item \textbf{Analyse} the effectiveness of each guessing algorithm.
+\end{enumerate}
+
+\textbf{Rationale:} There are many different variations of Battleship AI, each taking a different approach to solve the problem. This research will compare the most common approaches and an implementation that combines the most efficient approaches will be developed, tried and tested against the existing algorithms. This will be done by analysing the average amount of shots each algorithm takes to win a single games for a set amount of times. This data will be compared with the new algorithm and its efficiency is deduced.\\\\
+\textbf{Current Solutions/Alternatives:} Many implementations can be found on websites such as Github.\\\\
+\textbf{Desired End Product:} A fully functional AI that implements a probabilistic approach along with calculated guessing. \\\\
+\textbf{TimeFrame:}
+\begin{table}[h]
+    \begin{tabular}{l|l}
+    \textbf{Task}                  & \textbf{Deadline}     \\ \hline
+    Literature Review     & Mid March    \\
+    Prototype Development & End of April \\
+    Data Analysis         & Mid May \\
+    Write-up              & End of May   \\
+    \end{tabular}
+    \centering
+    \label{tab:schedule}
+    \caption{Schedule}
+\end{table}
+
+\textbf{Research Method} 
+\begin{enumerate}
+	\item Develop a console application that has the functions of a Battleship game with the ability to simulate a set number of games and output the data gathered.
+	\item Implement the algorithms that will be analysed. 
+	\item Run the algorithms for large number of times and gather the results.
+	\item Tabulate and analyse the results gathered.
+\end{enumerate}
+
+\end{document}
