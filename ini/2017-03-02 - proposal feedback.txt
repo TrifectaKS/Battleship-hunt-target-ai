@@ -1,0 +1,31 @@
+An excellent research idea with potential for a dissertation.
+
+Reorganise the git repository
+
+Revise your objectives and subjectives (final submission and dissertation proposal) as follows:
+1 - Research:
+1.1 theme 
+1.2 tools
+1.3 academic aspect 
+
+2 - Develop:
+2.1 dataset 
+2.2 prototype 
+
+3 - Analysis:
+3.1 data (is it a large enough dataset, is it biased, is it limited to text only,...)
+3.2 prototype (its accuracy, limitations)
+3.3 hypothesis (is it a feasible idea, did it work, ...)
+3.4 research
+3.5 project (were you given enough time, guidance, meetings were enough..)
+
+4 - documentation
+4.1 initial proposal
+4.2 ieee paper
+4.3 viva presentation
+
+As current alternatives do an official citation of other research, via google scholar, such as:
+	http://pubsonline.informs.org/doi/pdf/10.1287/ited.1100.0047
+	https://www.researchgate.net/profile/Roman_Yampolskiy/publication/256169421_Using_a_GA_and_Wisdom_of_Artificial_Crowds_to_solve_solitaire_battleship_puzzles/links/56df4f4f08ae979addef591b.pdf
+	
+Revise your schedule (final submission and dissertation proposal) to cover the various tasks in the entire project.
