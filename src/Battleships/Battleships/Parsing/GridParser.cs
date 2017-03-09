@@ -35,10 +35,10 @@ namespace Battleships.Parsing
 
             foreach(char c in charGrid)
             {
-                switch (charGrid[i])
+                switch (c)
                 {
-                    case '0':
-                        grid[xCount, yCount] = Int32.Parse("" + c);
+                    case '#':
+                        grid[xCount, yCount] = 0;
                         xCount++;
                         break;
                     case '1':
@@ -76,7 +76,6 @@ namespace Battleships.Parsing
 
             List<Ship> ships = InitializeShips();
             
-            //Initialize the 5 ships
             for(int y = 0; y < size; y++)
             {
                 for(int x = 0; x < size; x++)
