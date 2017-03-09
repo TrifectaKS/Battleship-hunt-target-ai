@@ -1,1 +1,2 @@
 C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Debug\Battleships.exe.config
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\obj\Debug\Battleships.csprojResolveAssemblyReference.cache

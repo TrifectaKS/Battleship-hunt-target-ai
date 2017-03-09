@@ -1,0 +1,23 @@
+﻿ Rules of Hasbro's battleship board game
+            
+            5 Ships
+                Carrier (5) - CV represented as (1)
+                Battleship (4) - BB represented as (2)
+                Crusier (3) - CL represented as (3)
+                Submarine (3) - SS represented as (4)
+                Destroyer (2) - DD represented as (5)
+				Empty represented as (0)
+                
+            10 by 10 grid
+            
+             0 1 2 3 4 5 6 7 8 9
+           0 # 1 # # # # # # # #
+           1 # 1 # # # # # # # #
+           2 # 1 # # # 3 # # # #
+           3 # 1 # # # 3 # # # #
+           4 # 1 # # # 3 # # # #
+           5 # # # # # # # 4 # #
+           6 # 2 2 2 2 # # 4 # #
+           7 # # # # # # # 4 # #
+           8 # # # # # # # # # #
+           9 # # # # 5 5 # # # #
