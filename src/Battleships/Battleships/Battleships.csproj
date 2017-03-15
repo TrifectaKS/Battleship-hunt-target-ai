@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\GridEnums.cs" />
     <Compile Include="Enums\ShipTypes.cs" />
     <Compile Include="File Operations\FileReader.cs" />
     <Compile Include="File Operations\Files.cs" />

@@ -24,7 +24,7 @@ namespace Battleships.Parsing
             return ships;
         }
 
-        public static int[,] TextToArray(string gridString, int size)
+        private static int[,] TextToArray(string gridString, int size)
         {
             char[] charGrid = gridString.ToCharArray();
 
@@ -70,11 +70,9 @@ namespace Battleships.Parsing
             return grid;
         }
 
-        public static Cell[,] ParseGrid(int[,] grid, int size)
+        private static Cell[,] ParseGrid(int[,] grid, List<Ship> ships, int size)
         {
             Cell[,] cellGrid = new Cell[size,size];
-
-            List<Ship> ships = InitializeShips();
             
             for(int y = 0; y < size; y++)
             {
@@ -104,6 +102,17 @@ namespace Battleships.Parsing
                 }
             }
             return cellGrid;
+        }
+
+        public static Board Parse(string gridString, int size)
+        {
+            List<Ship> ships = InitializeShips();
+            return new Board()
+            {
+                Grid = ParseGrid(TextToArray(gridString, size), ships, size)
+                , Ships = ships
+                , Size = size
+            };
         }
     }
 }

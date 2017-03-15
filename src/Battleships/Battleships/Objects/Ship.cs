@@ -19,16 +19,5 @@ namespace Battleships.Objects
         public ShipType Type { get; set; }
         public int PartsShot { get; set; }
         public bool IsDestroyed { get; set; }
-        public void ShootPart(Cell c)
-        {
-            if (!IsDestroyed)
-            {
-                c.IsHit = true;
-                c.IsShot = true;
-                PartsShot++;
-                if (PartsShot == (int)Type)
-                    IsDestroyed = true;
-            }
-        }
     }
 }
