@@ -18,7 +18,7 @@ namespace Battleships.Functions
             ~ For empty cells
             x For missed shot cells
         */
-        public static string Grid(Board b)
+        public static void Grid(Board b)
         {
             string str = "";
             
@@ -57,13 +57,17 @@ namespace Battleships.Functions
                 }
                 str += "\n";
             }
-            return str;
+
+            Console.WriteLine(str);
         }
         
-        public static string Ships(Board b, bool destroyed)
+        public static void Ships(Board b, bool destroyed)
         {
             if (b.Ships == null || b.Ships.Count == 0)
-                return "No Ships Found";
+            {
+                Console.WriteLine("No Ships Found");
+                return;
+            }
 
             string str = "Live Ships:\n";
             int c = 1;
@@ -76,13 +80,17 @@ namespace Battleships.Functions
                     c++;
                 }
             }
-            return str;
+
+            Console.WriteLine(str);
         }
 
-        public static string Ships(Board b)
+        public static void Ships(Board b)
         {
             if (b.Ships == null || b.Ships.Count == 0)
-                return "No Ships Found";
+            {
+                Console.WriteLine("No Ships Found");
+                return;
+            }
 
             string str = "All Ships:\n";
             int c = 1;
@@ -92,7 +100,8 @@ namespace Battleships.Functions
                 str += "Ship " + c + ": " + s.Type.ToString() + "\n";
                 c++;
             }
-            return str;
+
+            Console.WriteLine(str);
         }
     }
 }
