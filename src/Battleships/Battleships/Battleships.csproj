@@ -44,9 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\ShipTypes.cs" />
-    <Compile Include="File Operations\FileReader.cs" />
     <Compile Include="File Operations\Files.cs" />
-    <Compile Include="File Operations\FileWriter.cs" />
     <Compile Include="Functions\Display.cs" />
     <Compile Include="Objects\Board.cs" />
     <Compile Include="Objects\Cell.cs" />
@@ -62,7 +60,9 @@
     <Folder Include="Algorithms\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Grids\Grid1.txt" />
+    <Content Include="Grids\Grid1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Notes\Parsing Plan.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

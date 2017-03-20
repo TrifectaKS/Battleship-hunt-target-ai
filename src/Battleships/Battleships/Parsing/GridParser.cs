@@ -63,6 +63,7 @@ namespace Battleships.Parsing
                         break;
                     case '\n':
                         yCount++;
+                        xCount = 0;
                         break;
                 }
             }

@@ -1,2 +1,7 @@
 C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Debug\Battleships.exe.config
 C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\obj\Debug\Battleships.csprojResolveAssemblyReference.cache
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Debug\Battleships.exe
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Debug\Battleships.pdb
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\obj\Debug\Battleships.exe
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\obj\Debug\Battleships.pdb
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Debug\Grids\Grid1.txt
