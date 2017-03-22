@@ -1,4 +1,5 @@
 ﻿using Battleships.File_Operations;
+using Battleships.Functions;
 using Battleships.Objects;
 using Battleships.Parsing;
 using System;
@@ -19,6 +20,8 @@ namespace Battleships
             {
                 string s = Files.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
                 Board board = GridParser.Parse(s, 10);
+                Display.Grid(board);
+                Display.Ships(board);
             }catch(Exception e)
             {
                 Console.WriteLine(e.ToString());

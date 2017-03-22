@@ -1,5 +1,4 @@
-﻿using Battleships.Enums;
-using Battleships.Objects;
+﻿using Battleships.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,13 +36,13 @@ namespace Battleships.Functions
                     {
                         if (!b.Grid[x, y].Ship.IsDestroyed && !b.Grid[x,y].IsHit)
                         {
-                            switch (b.Grid[x, y].Ship.Type.ToString())
+                            switch (b.Grid[x, y].Ship.Type)
                             {
-                                case "CV": str += "E "; break; //e
-                                case "CL": str += "C "; break; //c
-                                case "BB": str += "D "; break; //d
-                                case "DD": str += "A "; break; //a
-                                case "SS": str += "B "; break; //b
+                                case Ship.CV_ID: str += Ship.CV_ID + " "; break; //e
+                                case Ship.CL_ID: str += Ship.CL_ID + " "; break; //c
+                                case Ship.BB_ID: str += Ship.BB_ID + " "; break; //d
+                                case Ship.DD_ID: str += Ship.DD_ID + " "; break; //a
+                                case Ship.SS_ID: str += Ship.SS_ID + " "; break; //b
                             }
                         }
                         else if(!b.Grid[x, y].Ship.IsDestroyed && b.Grid[x, y].IsHit)
@@ -76,7 +75,7 @@ namespace Battleships.Functions
             {
                 if (s.IsDestroyed == destroyed)
                 {
-                    str += "Ship " + c + ": " + s.Type.ToString() + "\n";
+                    str += "Ship " + c + ": " + s.Name + " Lenght: " + s.Length + "\n";
                     c++;
                 }
             }
@@ -97,7 +96,7 @@ namespace Battleships.Functions
             
             foreach (Ship s in b.Ships)
             {
-                str += "Ship " + c + ": " + s.Type.ToString() + "\n";
+                str += "Ship " + c + ": " + s.Name + " Lenght: " + s.Length + "\n";
                 c++;
             }
 

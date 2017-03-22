@@ -20,21 +20,28 @@ namespace Battleships.Objects
         public Ship Ship { get; set; }
         public bool IsShot { get; set; }
         public bool IsHit { get; set; }
-        public void ShootPart()
+        public ShotResult Shoot()
         {
             if(Ship == null)
             {
                 IsShot = true;
                 IsHit = false;
+                return new ShotResult { ShotType = ShotType.Missed };
             }
             else if (!Ship.IsDestroyed)
             {
                 IsShot = true;
                 IsHit = true;
                 Ship.PartsShot++;
-                if (Ship.PartsShot == (int)Ship.Type)
+                if (Ship.PartsShot == Ship.Type)
+                {
                     Ship.IsDestroyed = true;
+                    return new ShotResult { ShotType = ShotType.Destroyed, ShipType = Ship.Type };
+                }
+                return new ShotResult { ShotType = ShotType.Hit };
             }
+
+            return new ShotResult { ShotType = ShotType.Missed };
         }
     }
 }

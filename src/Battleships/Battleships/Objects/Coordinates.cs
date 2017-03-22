@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Battleships.Objects
 {
-    class Board
+    class Coordinates
     {
-        
-        public Cell[,] Grid { get; set; }
-        public int Size { get; set; }
-        public List<Ship> Ships { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Val { get; set; }
     }
 }

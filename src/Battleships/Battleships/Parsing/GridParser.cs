@@ -1,5 +1,4 @@
-﻿using Battleships.Enums;
-using Battleships.Objects;
+﻿using Battleships.Objects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,11 +14,11 @@ namespace Battleships.Parsing
         {
             List<Ship> ships = new List<Ship>();
 
-            ships.Add(new Ship(ShipType.CV));
-            ships.Add(new Ship(ShipType.BB));
-            ships.Add(new Ship(ShipType.CL));
-            ships.Add(new Ship(ShipType.SS));
-            ships.Add(new Ship(ShipType.DD));
+            ships.Add(new Ship(Ship.CV_ID));
+            ships.Add(new Ship(Ship.BB_ID));
+            ships.Add(new Ship(Ship.CL_ID));
+            ships.Add(new Ship(Ship.SS_ID));
+            ships.Add(new Ship(Ship.DD_ID));
 
             return ships;
         }
@@ -85,19 +84,19 @@ namespace Battleships.Parsing
                             cellGrid[x, y] = new Cell(null);
                             break;
                         case 1:
-                            cellGrid[x, y] = new Cell(ships.ElementAt(grid[x,y] - 1));
+                            cellGrid[x, y] = new Cell(ships.ElementAt(grid[x,y] - 1)); //1 IS CV
                             break;
                         case 2:
-                            cellGrid[x, y] = new Cell(ships.ElementAt(grid[x,y] - 1));
+                            cellGrid[x, y] = new Cell(ships.ElementAt(grid[x,y] - 1)); //2 IS BB
                             break;
                         case 3:
-                            cellGrid[x, y] = new Cell(ships.ElementAt(grid[x,y] - 1));
+                            cellGrid[x, y] = new Cell(ships.ElementAt(grid[x,y] - 1)); //3 IS CL
                             break;
                         case 4:
-                            cellGrid[x, y] = new Cell(ships.ElementAt(grid[x,y] - 1));
+                            cellGrid[x, y] = new Cell(ships.ElementAt(grid[x,y] - 1)); //4 IS SS
                             break;
                         case 5:
-                            cellGrid[x, y] = new Cell(ships.ElementAt(grid[x,y] - 1));
+                            cellGrid[x, y] = new Cell(ships.ElementAt(grid[x,y] - 1)); //5 IS DD
                             break;
                     }
                 }

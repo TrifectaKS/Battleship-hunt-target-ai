@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Battleships.Objects
 {
-    class Board
+    class Statistics
     {
+        public int TotalShots { get; set; }
+        public int TotalHits { get; set; }
+        public int TotalMisses { get; set; }
         
-        public Cell[,] Grid { get; set; }
-        public int Size { get; set; }
-        public List<Ship> Ships { get; set; }
     }
 }
