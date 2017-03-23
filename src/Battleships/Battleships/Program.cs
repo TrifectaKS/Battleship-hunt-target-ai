@@ -1,4 +1,5 @@
-﻿using Battleships.File_Operations;
+﻿using Battleships.Algorithms;
+using Battleships.File_Operations;
 using Battleships.Functions;
 using Battleships.Objects;
 using Battleships.Parsing;
@@ -18,11 +19,32 @@ namespace Battleships
         {
             try
             {
-                string s = Files.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
-                Board board = GridParser.Parse(s, 10);
-                Display.Grid(board);
-                Display.Ships(board);
-            }catch(Exception e)
+                List<Statistics> st = new List<Statistics>();
+                int iterations = 1000;
+
+                for (int i = 0; i < iterations; i++)
+                {
+                    string s = Files.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
+                    Board board = GridParser.Parse(s, 10);
+                    RandomAI RandAI = new RandomAI(board);
+                    Statistics stats = RandAI.Play();
+                    st.Add(stats);
+                }
+                
+                double avgShots = 0, avgMisses = 0;
+                foreach(Statistics stat in st)
+                {
+                    avgShots += stat.TotalShots;
+                    avgMisses += stat.TotalMisses;
+                }
+
+                avgShots = avgShots/iterations;
+                avgMisses = avgMisses/iterations;
+
+                Console.WriteLine("Average Shots: " + avgShots + "\nAverage Misses = " + avgMisses);
+
+            }
+            catch(Exception e)
             {
                 Console.WriteLine(e.ToString());
             }

@@ -1,4 +1,5 @@
 ﻿using Battleships.Enums;
+using Battleships.Functions;
 using Battleships.Objects;
 using System;
 using System.Collections.Generic;
@@ -10,35 +11,49 @@ namespace Battleships.Algorithms
 {
     class RandomAI
     {
-        public int Size { get; set; }
         private Random Rand { get; set; }
-        public int[,] Grid { get; set; }
-        public List<int> ShotHistory { get; set; }
-        public Board Board { get; set; }
-        public int ShipsDestroyed { get; set; }
+        private int[,] Grid { get; set; }
+        private List<int> ShotsAvailable { get; set; }
+        private List<int> ShotHistory { get; set; }
+        private Board Board { get; set; }
+        private int ShipsDestroyed { get; set; }
+        private Statistics Stats { get; set; }
         
-        public RandomAI(Board board, int size)
+        public RandomAI(Board board)
         {
             Board = board;
-            Size = size;
             ShipsDestroyed = 0;
-            Grid = new int[Size, Size];
+            Grid = new int[Board.Size, Board.Size];
             ShotHistory = new List<int>();
+            ShotsAvailable = new List<int>();
             Rand = new Random();
-
+            Stats = new Statistics();
             init();
+        }
+
+        public Statistics Play()
+        {
+            while(ShipsDestroyed != Ship.NUM_OF_SHIPS)
+            {
+                //Display.Grid(Board);
+                //Console.WriteLine("SHOOT");
+                Shoot();
+            }
+
+            return Stats;
         }
 
         private void init()
         {
-            int cells = Size * Size;
+            int cells = Board.Size * Board.Size;
             int count = 0;
 
-            for(int y = 0; y < Size; y++)
+            for(int y = 0; y < Board.Size; y++)
             {
-                for(int x = 0; x < Size; x++)
+                for(int x = 0; x < Board.Size; x++)
                 {
                     Grid[x, y] = count;
+                    ShotsAvailable.Add(count);
                     count++;
                 }
             }
@@ -49,14 +64,12 @@ namespace Battleships.Algorithms
             Coordinates c = GetCoordinates();
             ShotResult result = Board.Grid[c.X, c.Y].Shoot();
             ShotHistory.Add(c.Val);
-
-            if (result.ShotType == ShotType.Destroyed)
+            switch (result.ShotType)
             {
-                ShipsDestroyed++;
-                if(ShipsDestroyed == Ship.NUM_OF_SHIPS)
-                {
-
-                }
+                case ShotType.Missed: Stats.TotalMisses++; break;
+                case ShotType.Hit: Stats.TotalHits++; break;
+                case ShotType.Destroyed: Stats.TotalHits++; ShipsDestroyed++; break;
+                default: Stats.TotalMisses++; break;
             }
         }
 
@@ -74,30 +87,15 @@ namespace Battleships.Algorithms
 
         private int GetCellNumber()
         {
-            bool flag = false;
-            int cellNum = -1;
-
-            do
-            {
-                cellNum = GenerateRandom();
-                flag = false;
-
-                foreach (int shot in ShotHistory)
-                {
-                    if (shot == cellNum)
-                    {
-                        flag = true;
-                        break;
-                    }
-                }
-            } while (flag == true);
-
-            return cellNum;
+            int index = GenerateRandom(0, ShotsAvailable.Count);
+            int num = ShotsAvailable.ElementAt(index);
+            ShotsAvailable.RemoveAt(index);
+            return num;
         }
 
-        private int GenerateRandom()
+        private int GenerateRandom(int min, int max)
         {
-            return Rand.Next(0, Size);
+            return Rand.Next(min, max);
         }
     }
 }

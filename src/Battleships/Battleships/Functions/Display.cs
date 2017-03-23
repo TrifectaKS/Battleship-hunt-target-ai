@@ -48,7 +48,7 @@ namespace Battleships.Functions
                         else if(!b.Grid[x, y].Ship.IsDestroyed && b.Grid[x, y].IsHit)
                         {
                             str += "0 ";
-                        }else if(b.Grid[x, y].Ship.IsDestroyed && b.Grid[x, y].IsHit)
+                        }else if(b.Grid[x, y].Ship.IsDestroyed)
                         {
                             str += "# ";
                         }
@@ -101,6 +101,11 @@ namespace Battleships.Functions
             }
 
             Console.WriteLine(str);
+        }
+
+        public static void Statistics(Statistics s)
+        {
+            Console.WriteLine("Total Shots: " + s.TotalShots + "\nTotal Misses: " + s.TotalMisses + "\nTotal Hits:" + s.TotalHits);
         }
     }
 }

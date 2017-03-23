@@ -33,7 +33,7 @@ namespace Battleships.Objects
                 IsShot = true;
                 IsHit = true;
                 Ship.PartsShot++;
-                if (Ship.PartsShot == Ship.Type)
+                if (Ship.PartsShot == Ship.Length)
                 {
                     Ship.IsDestroyed = true;
                     return new ShotResult { ShotType = ShotType.Destroyed, ShipType = Ship.Type };
