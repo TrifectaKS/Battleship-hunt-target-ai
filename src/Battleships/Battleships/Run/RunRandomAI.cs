@@ -23,7 +23,7 @@ namespace Battleships.Test
                 for (int i = 0; i < iterations; i++)
                 {
                     string s = Files.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
-                    Board board = GridParser.Parse(s, 10);
+                    Board board = GridParser.Parse(s, 12);
                     RandomAI RandAI = new RandomAI(board);
                     Statistics stats = RandAI.Play();
                     st.Add(stats);

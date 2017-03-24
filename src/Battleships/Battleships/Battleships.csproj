@@ -70,6 +70,7 @@
     <Content Include="Grids\Grid1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Notes\HuntTarget Algorithm.txt" />
     <Content Include="Notes\Parsing Plan.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

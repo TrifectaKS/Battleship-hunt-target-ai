@@ -18,7 +18,7 @@ namespace Battleships
     {
         static void Main(string[] args)
         {
-            //RunRandomAI.Run();
+            RunRandomAI.Run();
 
             Console.ReadKey();
         }
