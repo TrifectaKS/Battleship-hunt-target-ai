@@ -27,7 +27,7 @@ namespace Battleships.Algorithms
         {
             return null;
         }
-
+        
         private void init()
         {
             if (GenerateRandom(1, 2) % 2 == 0) IsEven = true;

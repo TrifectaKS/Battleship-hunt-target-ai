@@ -16,6 +16,22 @@ namespace Battleships.Algorithms
             init();
         }
 
+        private void init()
+        {
+            int cells = Board.Size * Board.Size;
+            int count = 0;
+
+            for (int y = 0; y < Board.Size; y++)
+            {
+                for (int x = 0; x < Board.Size; x++)
+                {
+                    Grid[x, y] = count;
+                    ShotsAvailable.Add(count + 1);
+                    count++;
+                }
+            }
+        }
+
         public Statistics Play()
         {
             while (ShipsDestroyed != Ship.NUM_OF_SHIPS)
@@ -27,25 +43,9 @@ namespace Battleships.Algorithms
             return Stats;
         }
 
-        private void init()
-        {
-            int cells = Board.Size * Board.Size;
-            int count = 0;
-
-            for (int y = 0; y < Board.Size; y++)
-            {
-                for (int x = 0; x < Board.Size; x++)
-                {
-                    Grid[x, y] = count;
-                    ShotsAvailable.Add(count);
-                    count++;
-                }
-            }
-        }
-
         private void Shoot()
         {
-            Coordinates c = GetCoordinates();
+            Coordinates c = GetCoordinates(GetCellNumber());
             ShotResult result = Board.Grid[c.X, c.Y].Shoot();
 
             result.AIState = State.Random;
