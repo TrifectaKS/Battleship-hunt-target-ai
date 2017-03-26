@@ -20,6 +20,7 @@ namespace Battleships.Algorithms
         {
             while (ShipsDestroyed != Ship.NUM_OF_SHIPS)
             {
+                ShotNumber++;
                 Shoot();
             }
 
@@ -46,6 +47,15 @@ namespace Battleships.Algorithms
         {
             Coordinates c = GetCoordinates();
             ShotResult result = Board.Grid[c.X, c.Y].Shoot();
+
+            result.AIState = State.Random;
+            result.DirectionTaken = DirectionTaken.Random;
+            result.InitialTargetX= c.X;
+            result.InitialTargetY = c.Y;
+            result.Orientation = Orientation.Random;
+            result.ShotNumber = ShotNumber;
+
+            Stats.Shots.Add(result);
 
             switch (result.ShotType)
             {

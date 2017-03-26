@@ -49,6 +49,7 @@
     <Compile Include="Enums\DirectionTaken.cs" />
     <Compile Include="Enums\Orientation.cs" />
     <Compile Include="Enums\ShotType.cs" />
+    <Compile Include="Enums\State.cs" />
     <Compile Include="File Operations\Files.cs" />
     <Compile Include="Functions\Display.cs" />
     <Compile Include="Objects\Board.cs" />
@@ -70,6 +71,8 @@
     <Content Include="Grids\Grid1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Notes\Database Structure.txt" />
+    <Content Include="Notes\GridSize.txt" />
     <Content Include="Notes\HuntTarget Algorithm.txt" />
     <Content Include="Notes\Parsing Plan.txt" />
   </ItemGroup>

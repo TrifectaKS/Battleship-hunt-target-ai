@@ -15,11 +15,13 @@ namespace Battleships.Algorithms
         internal Board Board { get; set; }
         internal int ShipsDestroyed { get; set; }
         internal Statistics Stats { get; set; }
+        internal int ShotNumber { get; set; }
 
         public AI(Board board)
         {
             Board = board;
             ShipsDestroyed = 0;
+            ShotNumber = 0;
             Grid = new int[Board.Size, Board.Size];
             ShotsAvailable = new List<int>();
             Rand = new Random();
@@ -27,7 +29,7 @@ namespace Battleships.Algorithms
         }
 
         internal Coordinates GetCoordinates()
-        {
+        { 
             int num = GetCellNumber();
             char[] coords = (num + "").ToCharArray();
 

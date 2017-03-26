@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Battleships.Enums
 {
-    public enum DirectionTaken
+    public enum State
     {
-        Up = 8,
-        Down = 2,
-        Left = 4,
-        Right = 6,
-        Random = 5
+        Hunt = 1,
+        Target = 2,
+        Random = 3
     }
 }

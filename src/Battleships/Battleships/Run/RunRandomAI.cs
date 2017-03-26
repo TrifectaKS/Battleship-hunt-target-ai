@@ -13,17 +13,18 @@ namespace Battleships.Test
 {
     class RunRandomAI
     {
+        const int SIZE = 10;
+        const int ITERATIONS = 10000;
         public static void Run()
         {
             try
             {
                 List<Statistics> st = new List<Statistics>();
-                int iterations = 1000;
 
-                for (int i = 0; i < iterations; i++)
+                for (int i = 0; i < ITERATIONS; i++)
                 {
                     string s = Files.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
-                    Board board = GridParser.Parse(s, 12);
+                    Board board = GridParser.Parse(s, SIZE);
                     RandomAI RandAI = new RandomAI(board);
                     Statistics stats = RandAI.Play();
                     st.Add(stats);
@@ -36,8 +37,8 @@ namespace Battleships.Test
                     avgMisses += stat.TotalMisses;
                 }
 
-                avgShots = avgShots / iterations;
-                avgMisses = avgMisses / iterations;
+                avgShots = avgShots / ITERATIONS;
+                avgMisses = avgMisses / ITERATIONS;
 
                 Console.WriteLine("Average Shots: " + avgShots + "\nAverage Misses = " + avgMisses);
             }
