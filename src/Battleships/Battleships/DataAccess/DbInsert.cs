@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleships.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +9,19 @@ namespace Battleships.DataAccess
 {
     class DbInsert
     {
-        public static bool Insert(List<Shot> s, List<Game> g, Simulation sim)
+        public static bool Insert(Statistics stats)
         {
             try
             {
                 DbRepository repo = new DbRepository();
-                repo.AddSimulation(sim);
-                repo.AddGames(g);
-                repo.AddShots(s);
+                repo.AddSimulation(stats.Simulation);
+                repo.AddGames(stats.Games);
+                repo.AddShots(stats.Shots);
                 return true;
             }
-            catch
+            catch(Exception e)
             {
-                return false;
+                throw e;
             }
         }
     }

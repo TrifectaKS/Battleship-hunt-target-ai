@@ -21,6 +21,7 @@
           <Property Name="ShotId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="GameId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ShipTypeId" Type="int" Nullable="false" />
+          <Property Name="ShotTypeId" Type="int" Nullable="false" />
           <Property Name="OrientationId" Type="int" />
           <Property Name="DirectionId" Type="int" />
           <Property Name="X" Type="int" Nullable="false" />
@@ -39,7 +40,7 @@
           <Property Name="Description" Type="text" />
           <Property Name="SimulationDate" Type="datetime" />
           <Property Name="TimeTakenMS" Type="int" />
-          <Property Name="AIType" Type="int" Nullable="false" />
+          <Property Name="AIType" Type="int" />
         </EntityType>
         <Association Name="FK_Game">
           <End Role="Games" Type="Self.Games" Multiplicity="1" />
@@ -113,6 +114,7 @@
           <Property Name="ShotId" Type="Guid" Nullable="false" />
           <Property Name="GameId" Type="Guid" Nullable="false" />
           <Property Name="ShipTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ShotTypeId" Type="Int32" Nullable="false" />
           <Property Name="OrientationId" Type="Int32" />
           <Property Name="DirectionId" Type="Int32" />
           <Property Name="X" Type="Int32" Nullable="false" />
@@ -132,7 +134,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="SimulationDate" Type="DateTime" Precision="3" />
           <Property Name="TimeTakenMS" Type="Int32" />
-          <Property Name="AIType" Type="Int32" Nullable="false" />
+          <Property Name="AIType" Type="Int32" />
           <NavigationProperty Name="Games" Relationship="BattleshipDBModel.FK_Simulation" FromRole="Simulation" ToRole="Game" />
         </EntityType>
         <Association Name="FK_Game">
@@ -159,7 +161,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -187,6 +189,7 @@
                 <ScalarProperty Name="X" ColumnName="X" />
                 <ScalarProperty Name="DirectionId" ColumnName="DirectionId" />
                 <ScalarProperty Name="OrientationId" ColumnName="OrientationId" />
+                <ScalarProperty Name="ShotTypeId" ColumnName="ShotTypeId" />
                 <ScalarProperty Name="ShipTypeId" ColumnName="ShipTypeId" />
                 <ScalarProperty Name="GameId" ColumnName="GameId" />
                 <ScalarProperty Name="ShotId" ColumnName="ShotId" />

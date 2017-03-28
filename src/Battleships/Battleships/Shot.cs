@@ -17,6 +17,7 @@ namespace Battleships
         public System.Guid ShotId { get; set; }
         public System.Guid GameId { get; set; }
         public int ShipTypeId { get; set; }
+        public int ShotTypeId { get; set; }
         public Nullable<int> OrientationId { get; set; }
         public Nullable<int> DirectionId { get; set; }
         public int X { get; set; }

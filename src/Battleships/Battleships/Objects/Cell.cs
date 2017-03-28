@@ -20,15 +20,15 @@ namespace Battleships.Objects
         public Ship Ship { get; set; }
         public bool IsShot { get; set; }
         public bool IsHit { get; set; }
-        public ShotResult Shoot()
+        public Shot Shoot()
         {
-            if(Ship == null)
+            if (Ship == null)
             {
                 IsShot = true;
                 IsHit = false;
-                return new ShotResult { ShotType = ShotType.Missed };
+                return new Shot { ShotTypeId = (int)ShotType.Missed , ShipTypeId = Ship.SEA};
             }
-            else if (!Ship.IsDestroyed)
+            if (!Ship.IsDestroyed)
             {
                 IsShot = true;
                 IsHit = true;
@@ -36,12 +36,12 @@ namespace Battleships.Objects
                 if (Ship.PartsShot == Ship.Length)
                 {
                     Ship.IsDestroyed = true;
-                    return new ShotResult { ShotType = ShotType.Destroyed, ShipType = Ship.Type };
+                    return new Shot { ShotTypeId = (int)ShotType.Destroyed, ShipTypeId = Ship.Type };
                 }
-                return new ShotResult { ShotType = ShotType.Hit };
+                return new Shot { ShotTypeId = (int)ShotType.Hit, ShipTypeId = Ship.Type };
             }
 
-            return new ShotResult { ShotType = ShotType.Missed };
+            return new Shot { ShotTypeId = (int)ShotType.Missed, ShipTypeId = Ship.SEA };
         }
     }
 }

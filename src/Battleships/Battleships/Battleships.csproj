@@ -33,42 +33,103 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Z.EntityFramework.Extensions, Version=3.11.12.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.EntityFramework.Extensions.3.11.12\lib\net45\Z.EntityFramework.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\AI.cs" />
     <Compile Include="Algorithms\HuntTargetAI.cs" />
     <Compile Include="Algorithms\RandomAI.cs" />
+    <Compile Include="BattleshipDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BattleshipDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BattleshipDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BattleshipDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BattleshipDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BattleshipDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\Connection.cs" />
+    <Compile Include="DataAccess\DbInsert.cs" />
+    <Compile Include="DataAccess\DbRepository.cs" />
     <Compile Include="Enums\DirectionTaken.cs" />
     <Compile Include="Enums\Orientation.cs" />
     <Compile Include="Enums\ShotType.cs" />
     <Compile Include="Enums\State.cs" />
     <Compile Include="File Operations\Files.cs" />
     <Compile Include="Functions\Display.cs" />
+    <Compile Include="Game.cs">
+      <DependentUpon>BattleshipDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Objects\Board.cs" />
     <Compile Include="Objects\Cell.cs" />
     <Compile Include="Objects\Coordinates.cs" />
     <Compile Include="Objects\Ship.cs" />
-    <Compile Include="Models\ShotResult.cs" />
     <Compile Include="Objects\Statistics.cs" />
     <Compile Include="Parsing\GridParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Run\CoordinatesTest.cs" />
     <Compile Include="Run\RunRandomAI.cs" />
+    <Compile Include="Shot.cs">
+      <DependentUpon>BattleshipDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Simulation.cs">
+      <DependentUpon>BattleshipDBModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="BattleshipDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BattleshipDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="BattleshipDBModel.edmx.diagram">
+      <DependentUpon>BattleshipDBModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BattleshipDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BattleshipDBModel.edmx</DependentUpon>
+      <LastGenOutput>BattleshipDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="BattleshipDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BattleshipDBModel.edmx</DependentUpon>
+      <LastGenOutput>BattleshipDBModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Grids\Grid1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -76,6 +137,9 @@
     <Content Include="Notes\GridSize.txt" />
     <Content Include="Notes\HuntTarget Algorithm.txt" />
     <Content Include="Notes\Parsing Plan.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

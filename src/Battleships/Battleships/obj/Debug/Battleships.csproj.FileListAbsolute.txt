@@ -5,3 +5,8 @@ C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\
 C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\obj\Debug\Battleships.exe
 C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\obj\Debug\Battleships.pdb
 C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Debug\Grids\Grid1.txt
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Debug\EntityFramework.dll
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Debug\Z.EntityFramework.Extensions.dll
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Debug\EntityFramework.xml
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Debug\EntityFramework.SqlServer.xml

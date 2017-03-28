@@ -13,17 +13,17 @@ namespace Battleships.Algorithms
         private List<int> ShotHistory { get; set; }
         private bool IsEven { get; set; }
 
-        public HuntTargetAI(Board board):base(board)
+        public HuntTargetAI(Board board, Guid guid):base(board,guid)
         {
             init();
         }
 
-        public ShotResult Hunt()
+        public Shot Hunt()
         {
             return null;
         }
 
-        public ShotResult Target()
+        public Shot Target()
         {
             return null;
         }

@@ -24,7 +24,7 @@ namespace Battleships
         public string Description { get; set; }
         public Nullable<System.DateTime> SimulationDate { get; set; }
         public Nullable<int> TimeTakenMS { get; set; }
-        public int AIType { get; set; }
+        public Nullable<int> AIType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Game> Games { get; set; }

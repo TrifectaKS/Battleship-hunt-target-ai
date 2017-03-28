@@ -14,20 +14,22 @@ namespace Battleships.Algorithms
         internal List<int> ShotsAvailable { get; set; }
         internal Board Board { get; set; }
         internal int ShipsDestroyed { get; set; }
-        internal Statistics Stats { get; set; }
+        internal List<Shot> Shots { get; set; }
         internal int ShotNumber { get; set; }
+        internal Guid GameGuid { get; set; }
 
         internal const int CountStart = 0;
 
-        public AI(Board board)
+        public AI(Board board, Guid guid)
         {
             Board = board;
+            GameGuid = guid;
             ShipsDestroyed = 0;
             ShotNumber = 0;
             Grid = new int[Board.Size, Board.Size];
             ShotsAvailable = new List<int>();
             Rand = new Random();
-            Stats = new Statistics();
+            Shots = new List<Shot>();
         }
         
         internal Coordinates GetCoordinates()

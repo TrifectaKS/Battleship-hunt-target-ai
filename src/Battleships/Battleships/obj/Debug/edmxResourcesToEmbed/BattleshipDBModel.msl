@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BattleshipDBModelStoreContainer" CdmEntityContainer="BattleshipDBEntities">
+    <EntitySetMapping Name="Games">
+      <EntityTypeMapping TypeName="BattleshipDBModel.Game">
+        <MappingFragment StoreEntitySet="Games">
+          <ScalarProperty Name="TimeTakenMS" ColumnName="TimeTakenMS" />
+          <ScalarProperty Name="SimulationId" ColumnName="SimulationId" />
+          <ScalarProperty Name="GameNumber" ColumnName="GameNumber" />
+          <ScalarProperty Name="GameId" ColumnName="GameId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Shots">
+      <EntityTypeMapping TypeName="BattleshipDBModel.Shot">
+        <MappingFragment StoreEntitySet="Shots">
+          <ScalarProperty Name="AIState" ColumnName="AIState" />
+          <ScalarProperty Name="TimeTakenMS" ColumnName="TimeTakenMS" />
+          <ScalarProperty Name="ShotNumber" ColumnName="ShotNumber" />
+          <ScalarProperty Name="InitialTargetY" ColumnName="InitialTargetY" />
+          <ScalarProperty Name="InitialTargetX" ColumnName="InitialTargetX" />
+          <ScalarProperty Name="Y" ColumnName="Y" />
+          <ScalarProperty Name="X" ColumnName="X" />
+          <ScalarProperty Name="DirectionId" ColumnName="DirectionId" />
+          <ScalarProperty Name="OrientationId" ColumnName="OrientationId" />
+          <ScalarProperty Name="ShotTypeId" ColumnName="ShotTypeId" />
+          <ScalarProperty Name="ShipTypeId" ColumnName="ShipTypeId" />
+          <ScalarProperty Name="GameId" ColumnName="GameId" />
+          <ScalarProperty Name="ShotId" ColumnName="ShotId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Simulations">
+      <EntityTypeMapping TypeName="BattleshipDBModel.Simulation">
+        <MappingFragment StoreEntitySet="Simulation">
+          <ScalarProperty Name="AIType" ColumnName="AIType" />
+          <ScalarProperty Name="TimeTakenMS" ColumnName="TimeTakenMS" />
+          <ScalarProperty Name="SimulationDate" ColumnName="SimulationDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SimulationId" ColumnName="SimulationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BattleshipDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BattleshipDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Games" EntityType="BattleshipDBModel.Game" />
+    <EntitySet Name="Shots" EntityType="BattleshipDBModel.Shot" />
+    <EntitySet Name="Simulations" EntityType="BattleshipDBModel.Simulation" />
+    <AssociationSet Name="FK_Game" Association="BattleshipDBModel.FK_Game">
+      <End Role="Game" EntitySet="Games" />
+      <End Role="Shot" EntitySet="Shots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Simulation" Association="BattleshipDBModel.FK_Simulation">
+      <End Role="Simulation" EntitySet="Simulations" />
+      <End Role="Game" EntitySet="Games" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Game">
+    <Key>
+      <PropertyRef Name="GameId" />
+    </Key>
+    <Property Name="GameId" Type="Guid" Nullable="false" />
+    <Property Name="GameNumber" Type="Int32" Nullable="false" />
+    <Property Name="SimulationId" Type="Guid" Nullable="false" />
+    <Property Name="TimeTakenMS" Type="Int32" />
+    <NavigationProperty Name="Shots" Relationship="BattleshipDBModel.FK_Game" FromRole="Game" ToRole="Shot" />
+    <NavigationProperty Name="Simulation" Relationship="BattleshipDBModel.FK_Simulation" FromRole="Game" ToRole="Simulation" />
+  </EntityType>
+  <EntityType Name="Shot">
+    <Key>
+      <PropertyRef Name="ShotId" />
+    </Key>
+    <Property Name="ShotId" Type="Guid" Nullable="false" />
+    <Property Name="GameId" Type="Guid" Nullable="false" />
+    <Property Name="ShipTypeId" Type="Int32" Nullable="false" />
+    <Property Name="ShotTypeId" Type="Int32" Nullable="false" />
+    <Property Name="OrientationId" Type="Int32" />
+    <Property Name="DirectionId" Type="Int32" />
+    <Property Name="X" Type="Int32" Nullable="false" />
+    <Property Name="Y" Type="Int32" Nullable="false" />
+    <Property Name="InitialTargetX" Type="Int32" />
+    <Property Name="InitialTargetY" Type="Int32" />
+    <Property Name="ShotNumber" Type="Int32" Nullable="false" />
+    <Property Name="TimeTakenMS" Type="Int32" />
+    <Property Name="AIState" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Game" Relationship="BattleshipDBModel.FK_Game" FromRole="Shot" ToRole="Game" />
+  </EntityType>
+  <EntityType Name="Simulation">
+    <Key>
+      <PropertyRef Name="SimulationId" />
+    </Key>
+    <Property Name="SimulationId" Type="Guid" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SimulationDate" Type="DateTime" Precision="3" />
+    <Property Name="TimeTakenMS" Type="Int32" />
+    <Property Name="AIType" Type="Int32" />
+    <NavigationProperty Name="Games" Relationship="BattleshipDBModel.FK_Simulation" FromRole="Simulation" ToRole="Game" />
+  </EntityType>
+  <Association Name="FK_Game">
+    <End Type="BattleshipDBModel.Game" Role="Game" Multiplicity="1" />
+    <End Type="BattleshipDBModel.Shot" Role="Shot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="GameId" />
+      </Principal>
+      <Dependent Role="Shot">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Simulation">
+    <End Type="BattleshipDBModel.Simulation" Role="Simulation" Multiplicity="1" />
+    <End Type="BattleshipDBModel.Game" Role="Game" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Simulation">
+        <PropertyRef Name="SimulationId" />
+      </Principal>
+      <Dependent Role="Game">
+        <PropertyRef Name="SimulationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BattleshipDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Games">
+    <Key>
+      <PropertyRef Name="GameId" />
+    </Key>
+    <Property Name="GameId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="GameNumber" Type="int" Nullable="false" />
+    <Property Name="SimulationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TimeTakenMS" Type="int" />
+  </EntityType>
+  <EntityType Name="Shots">
+    <Key>
+      <PropertyRef Name="ShotId" />
+    </Key>
+    <Property Name="ShotId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="GameId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ShipTypeId" Type="int" Nullable="false" />
+    <Property Name="ShotTypeId" Type="int" Nullable="false" />
+    <Property Name="OrientationId" Type="int" />
+    <Property Name="DirectionId" Type="int" />
+    <Property Name="X" Type="int" Nullable="false" />
+    <Property Name="Y" Type="int" Nullable="false" />
+    <Property Name="InitialTargetX" Type="int" />
+    <Property Name="InitialTargetY" Type="int" />
+    <Property Name="ShotNumber" Type="int" Nullable="false" />
+    <Property Name="TimeTakenMS" Type="int" />
+    <Property Name="AIState" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Simulation">
+    <Key>
+      <PropertyRef Name="SimulationId" />
+    </Key>
+    <Property Name="SimulationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Description" Type="text" />
+    <Property Name="SimulationDate" Type="datetime" />
+    <Property Name="TimeTakenMS" Type="int" />
+    <Property Name="AIType" Type="int" />
+  </EntityType>
+  <Association Name="FK_Game">
+    <End Role="Games" Type="Self.Games" Multiplicity="1" />
+    <End Role="Shots" Type="Self.Shots" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Games">
+        <PropertyRef Name="GameId" />
+      </Principal>
+      <Dependent Role="Shots">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Simulation">
+    <End Role="Simulation" Type="Self.Simulation" Multiplicity="1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Simulation">
+        <PropertyRef Name="SimulationId" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="SimulationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BattleshipDBModelStoreContainer">
+    <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shots" EntityType="Self.Shots" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Simulation" EntityType="Self.Simulation" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Game" Association="Self.FK_Game">
+      <End Role="Games" EntitySet="Games" />
+      <End Role="Shots" EntitySet="Shots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Simulation" Association="Self.FK_Simulation">
+      <End Role="Simulation" EntitySet="Simulation" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

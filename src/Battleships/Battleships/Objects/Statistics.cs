@@ -9,15 +9,19 @@ namespace Battleships.Objects
     [Serializable]
     class Statistics
     {
-        public Statistics()
+        public Statistics(Simulation s)
         {
             TotalHits = 0;
             TotalMisses = 0;
-            Shots = new List<ShotResult>();
+            Shots = new List<Shot>();
+            Games = new List<Game>();
+            Simulation = s;
         }
 
         private int hits, misses, shots;
-        public List<ShotResult> Shots { get; set; }
+        public Simulation Simulation { get; set; }
+        public List<Shot> Shots { get; set; }
+        public List<Game> Games { get; set; }
         public int TotalShots { get { return TotalHits + TotalMisses; } }
         public int TotalHits { get; set; }
         public int TotalMisses { get; set; }

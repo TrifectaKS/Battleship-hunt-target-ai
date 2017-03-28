@@ -68,17 +68,17 @@
 
 	--Simulation Table
 	CREATE TABLE	[dbo].[Simulation](
-		SimulationId	UNIQUEIDENTIFIER PRIMARY KEY NONCLUSTERED NOT NULL DEFAULT newsequentialid(),
+		SimulationId	UNIQUEIDENTIFIER PRIMARY KEY NONCLUSTERED NOT NULL,
 		[Description]	TEXT,
 		SimulationDate	DATETIME DEFAULT GETDATE(),
 		TimeTakenMS		INT,
-		AIType			INT NOT NULL CONSTRAINT FK_AIType REFERENCES [dbo].[AIType](AITypeId)
+		AIType			INT CONSTRAINT FK_AIType REFERENCES [dbo].[AIType](AITypeId)
 	);
 	GO
 
 	-- Game Table
 	CREATE TABLE	[dbo].[Games](
-		GameId			UNIQUEIDENTIFIER PRIMARY KEY NONCLUSTERED NOT NULL DEFAULT newsequentialid(),
+		GameId			UNIQUEIDENTIFIER PRIMARY KEY NONCLUSTERED NOT NULL,
 		GameNumber		INT NOT NULL,
 		SimulationId	UNIQUEIDENTIFIER NOT NULL CONSTRAINT FK_Simulation REFERENCES [dbo].[Simulation](SimulationId),
 		TimeTakenMS		INT,
@@ -87,9 +87,10 @@
 
 	-- Shots Table
 	CREATE TABLE	[dbo].[Shots](
-		ShotId			UNIQUEIDENTIFIER PRIMARY KEY NONCLUSTERED NOT NULL DEFAULT newsequentialid(),
+		ShotId			UNIQUEIDENTIFIER PRIMARY KEY DEFAULT newsequentialid() NOT NULL,
 		GameId			UNIQUEIDENTIFIER NOT NULL CONSTRAINT FK_Game REFERENCES [dbo].[Games](GameId),
 		ShipTypeId		INT NOT NULL CONSTRAINT FK_ShipType REFERENCES [dbo].[ShipTypes](ShipTypesId),
+		ShotTypeId		INT NOT NULL CONSTRAINT FK_ShotType REFERENCES [dbo].[ShotTypes](ShotTypeId),
 		OrientationId	INT CONSTRAINT FK_Orientation REFERENCES [dbo].[Orientations](OrientationId),
 		DirectionId		INT CONSTRAINT FK_Direction REFERENCES [dbo].[Directions](DirectionId),
 		X				INT NOT NULL,
@@ -141,7 +142,16 @@
 				(3, 'Cruiser', 'CL'),
 				(4, 'Submarine', 'SS'),
 				(5, 'Destroyer', 'DD'),
-				(6, 'SEA', 'SEA');
+				(0, 'SEA', 'SEA');
 	GO
 
 
+	select * 
+	from dbo.Simulation
+
+	select	*
+	from	dbo.Games
+	ORDER BY 2
+	
+	select	*
+	from	[dbo].Shots

@@ -11,7 +11,7 @@ namespace Battleships.Algorithms
 {
     class RandomAI:AI
     {
-        public RandomAI(Board board):base(board)
+        public RandomAI(Board board, Guid guid):base(board, guid)
         {
             init();
         }
@@ -32,7 +32,7 @@ namespace Battleships.Algorithms
             }
         }
 
-        public Statistics Play()
+        public List<Shot> Play()
         {
             while (ShipsDestroyed != Ship.NUM_OF_SHIPS)
             {
@@ -40,31 +40,28 @@ namespace Battleships.Algorithms
                 Shoot();
             }
 
-            return Stats;
+            return Shots;
         }
 
         private void Shoot()
         {
             Coordinates c = GetCoordinates(GetCellNumber());
             //Console.WriteLine("Shot num " + ShotNumber + " x " + c.X + " y " + c.Y);
-            ShotResult result = Board.Grid[c.X, c.Y].Shoot();
-
-            result.AIState = State.Random;
-            result.DirectionTaken = DirectionTaken.Random;
-            result.InitialTargetX= c.X;
-            result.InitialTargetY = c.Y;
-            result.Orientation = Orientation.Random;
+            Shot result = Board.Grid[c.X, c.Y].Shoot();
+             
+            result.ShotId = Guid.NewGuid();
+            result.GameId = GameGuid;
+            result.AIState = (int)State.Random;
+            result.DirectionId = (int)DirectionTaken.Random;
+            result.X= c.X;
+            result.Y = c.Y;
+            result.OrientationId = (int)Orientation.Random;
             result.ShotNumber = ShotNumber;
+            result.AIState = (int)State.Random;
 
-            Stats.Shots.Add(result);
+            Shots.Add(result);
 
-            switch (result.ShotType)
-            {
-                case ShotType.Missed: Stats.TotalMisses++; break;
-                case ShotType.Hit: Stats.TotalHits++; break;
-                case ShotType.Destroyed: Stats.TotalHits++; ShipsDestroyed++; break;
-                default: Stats.TotalMisses++; break;
-            }
+            if (result.ShotTypeId == (int)ShotType.Destroyed) ShipsDestroyed++;
         }
     }
 }

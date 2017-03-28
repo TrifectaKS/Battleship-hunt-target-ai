@@ -1,4 +1,5 @@
 ﻿using Battleships.Algorithms;
+using Battleships.DataAccess;
 using Battleships.File_Operations;
 using Battleships.Functions;
 using Battleships.Objects;
@@ -15,34 +16,32 @@ namespace Battleships.Test
     class RunRandomAI
     {
         const int SIZE = 10;
-        const int ITERATIONS = 100;
+        const int ITERATIONS = 1000;
         public static void Run()
         {
+            Statistics stats = new Statistics(new Simulation() {SimulationId = Guid.NewGuid(), Description = "Random AI", SimulationDate = DateTime.Now });
+
             try
             {
-                List<Statistics> st = new List<Statistics>();
-
                 for (int i = 0; i < ITERATIONS; i++)
                 {
+                    Game game = new Game();
+                    game.GameId = Guid.NewGuid();
+                    game.SimulationId = stats.Simulation.SimulationId;
+                    game.GameNumber = i + 1;
+
+
                     string s = Files.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
                     Board board = GridParser.Parse(s, SIZE);
-                    RandomAI RandAI = new RandomAI(board);
-                    Statistics stats = RandAI.Play();
-                    st.Add(stats);
+                    RandomAI RandAI = new RandomAI(board, game.GameId);
+                    stats.Shots.AddRange(RandAI.Play());
+                    stats.Games.Add(game);
                    // Display.Grid(board);
                 }
 
-                double avgShots = 0, avgMisses = 0;
-                foreach (Statistics stat in st)
-                {
-                    avgShots += stat.TotalShots;
-                    avgMisses += stat.TotalMisses;
-                }
+                DbInsert.Insert(stats);
+                Console.WriteLine("Done");
 
-                avgShots = avgShots / ITERATIONS;
-                avgMisses = avgMisses / ITERATIONS;
-
-                Console.WriteLine("Average Shots: " + avgShots + "\nAverage Misses = " + avgMisses);
             }
             catch (Exception e)
             {
