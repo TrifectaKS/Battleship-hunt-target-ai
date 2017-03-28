@@ -13,10 +13,13 @@ namespace Battleships.Objects
         public ShotType ShotType { get; set; }
         public Orientation Orientation { get; set; }
         public DirectionTaken DirectionTaken { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
         public int InitialTargetX { get; set; }
         public int InitialTargetY { get; set; }
         public int ShotNumber { get; set; }
         public State AIState { get; set; }
+        public int TimeTakenMS { get; set; }
 
     }
 }

@@ -26,7 +26,7 @@ namespace Battleships.Algorithms
                 for (int x = 0; x < Board.Size; x++)
                 {
                     Grid[x, y] = count;
-                    ShotsAvailable.Add(count + 1);
+                    ShotsAvailable.Add(count);
                     count++;
                 }
             }
@@ -46,6 +46,7 @@ namespace Battleships.Algorithms
         private void Shoot()
         {
             Coordinates c = GetCoordinates(GetCellNumber());
+            //Console.WriteLine("Shot num " + ShotNumber + " x " + c.X + " y " + c.Y);
             ShotResult result = Board.Grid[c.X, c.Y].Shoot();
 
             result.AIState = State.Random;

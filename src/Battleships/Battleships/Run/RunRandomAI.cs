@@ -1,5 +1,6 @@
 ﻿using Battleships.Algorithms;
 using Battleships.File_Operations;
+using Battleships.Functions;
 using Battleships.Objects;
 using Battleships.Parsing;
 using System;
@@ -14,7 +15,7 @@ namespace Battleships.Test
     class RunRandomAI
     {
         const int SIZE = 10;
-        const int ITERATIONS = 10000;
+        const int ITERATIONS = 100;
         public static void Run()
         {
             try
@@ -28,6 +29,7 @@ namespace Battleships.Test
                     RandomAI RandAI = new RandomAI(board);
                     Statistics stats = RandAI.Play();
                     st.Add(stats);
+                   // Display.Grid(board);
                 }
 
                 double avgShots = 0, avgMisses = 0;

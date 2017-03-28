@@ -44,31 +44,15 @@ namespace Battleships.Algorithms
 
         internal Coordinates GetCoordinates(int val)
         {
-            /*
-                val / size = y
-                    if y == floor(y)
-                        Coord.Y = y
-                        Coord.X = size
-                    else
-                        decimalval = decimalpart(y)
-                        Coord.Y = floor(y)
-                        Coord.X = round(integer, decimalval * size)
-             */
+            if(val == 0)
+                return new Coordinates { X = 0, Y = 0, Val = val };
 
-            double num = (double)val / (double)Board.Size;
-
-            if(num == Math.Floor(num))
-                return new Coordinates { X = Board.Size, Y = (int)num, Val = val };
-
-            if (Math.Floor(num) == 0)
-                return new Coordinates { Y = 0, X = (int)Math.Round((num - Math.Truncate(num))*Board.Size) };
-
-            return new Coordinates { Y = (int)Math.Floor(num), X = (int)Math.Round((num - Math.Truncate(num)) * Board.Size) };
+            return new Coordinates { X = (val) % Board.Size, Y = (val) / Board.Size, Val = val };
         }
 
         internal int GetCellNumber()
         {
-            int index = GenerateRandom(1, ShotsAvailable.Count);
+            int index = GenerateRandom(0, ShotsAvailable.Count);
             int num = ShotsAvailable.ElementAt(index);
             ShotsAvailable.RemoveAt(index);
             return num;
