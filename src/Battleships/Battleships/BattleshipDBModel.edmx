@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BattleshipDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GameNumber" Type="int" Nullable="false" />
+          <Property Name="SimulationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TimeTakenMS" Type="int" />
+        </EntityType>
+        <EntityType Name="Shots">
+          <Key>
+            <PropertyRef Name="ShotId" />
+          </Key>
+          <Property Name="ShotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GameId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ShipTypeId" Type="int" Nullable="false" />
+          <Property Name="OrientationId" Type="int" />
+          <Property Name="DirectionId" Type="int" />
+          <Property Name="X" Type="int" Nullable="false" />
+          <Property Name="Y" Type="int" Nullable="false" />
+          <Property Name="InitialTargetX" Type="int" />
+          <Property Name="InitialTargetY" Type="int" />
+          <Property Name="ShotNumber" Type="int" Nullable="false" />
+          <Property Name="TimeTakenMS" Type="int" />
+          <Property Name="AIState" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Simulation">
+          <Key>
+            <PropertyRef Name="SimulationId" />
+          </Key>
+          <Property Name="SimulationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="SimulationDate" Type="datetime" />
+          <Property Name="TimeTakenMS" Type="int" />
+          <Property Name="AIType" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Game">
+          <End Role="Games" Type="Self.Games" Multiplicity="1" />
+          <End Role="Shots" Type="Self.Shots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="Shots">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Simulation">
+          <End Role="Simulation" Type="Self.Simulation" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Simulation">
+              <PropertyRef Name="SimulationId" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="SimulationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BattleshipDBModelStoreContainer">
+          <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shots" EntityType="Self.Shots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Simulation" EntityType="Self.Simulation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Game" Association="Self.FK_Game">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Shots" EntitySet="Shots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Simulation" Association="Self.FK_Simulation">
+            <End Role="Simulation" EntitySet="Simulation" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BattleshipDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BattleshipDBEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Games" EntityType="BattleshipDBModel.Game" />
+          <EntitySet Name="Shots" EntityType="BattleshipDBModel.Shot" />
+          <EntitySet Name="Simulations" EntityType="BattleshipDBModel.Simulation" />
+          <AssociationSet Name="FK_Game" Association="BattleshipDBModel.FK_Game">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="Shot" EntitySet="Shots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Simulation" Association="BattleshipDBModel.FK_Simulation">
+            <End Role="Simulation" EntitySet="Simulations" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="Guid" Nullable="false" />
+          <Property Name="GameNumber" Type="Int32" Nullable="false" />
+          <Property Name="SimulationId" Type="Guid" Nullable="false" />
+          <Property Name="TimeTakenMS" Type="Int32" />
+          <NavigationProperty Name="Shots" Relationship="BattleshipDBModel.FK_Game" FromRole="Game" ToRole="Shot" />
+          <NavigationProperty Name="Simulation" Relationship="BattleshipDBModel.FK_Simulation" FromRole="Game" ToRole="Simulation" />
+        </EntityType>
+        <EntityType Name="Shot">
+          <Key>
+            <PropertyRef Name="ShotId" />
+          </Key>
+          <Property Name="ShotId" Type="Guid" Nullable="false" />
+          <Property Name="GameId" Type="Guid" Nullable="false" />
+          <Property Name="ShipTypeId" Type="Int32" Nullable="false" />
+          <Property Name="OrientationId" Type="Int32" />
+          <Property Name="DirectionId" Type="Int32" />
+          <Property Name="X" Type="Int32" Nullable="false" />
+          <Property Name="Y" Type="Int32" Nullable="false" />
+          <Property Name="InitialTargetX" Type="Int32" />
+          <Property Name="InitialTargetY" Type="Int32" />
+          <Property Name="ShotNumber" Type="Int32" Nullable="false" />
+          <Property Name="TimeTakenMS" Type="Int32" />
+          <Property Name="AIState" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Game" Relationship="BattleshipDBModel.FK_Game" FromRole="Shot" ToRole="Game" />
+        </EntityType>
+        <EntityType Name="Simulation">
+          <Key>
+            <PropertyRef Name="SimulationId" />
+          </Key>
+          <Property Name="SimulationId" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SimulationDate" Type="DateTime" Precision="3" />
+          <Property Name="TimeTakenMS" Type="Int32" />
+          <Property Name="AIType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Games" Relationship="BattleshipDBModel.FK_Simulation" FromRole="Simulation" ToRole="Game" />
+        </EntityType>
+        <Association Name="FK_Game">
+          <End Type="BattleshipDBModel.Game" Role="Game" Multiplicity="1" />
+          <End Type="BattleshipDBModel.Shot" Role="Shot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="Shot">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Simulation">
+          <End Type="BattleshipDBModel.Simulation" Role="Simulation" Multiplicity="1" />
+          <End Type="BattleshipDBModel.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Simulation">
+              <PropertyRef Name="SimulationId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="SimulationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BattleshipDBModelStoreContainer" CdmEntityContainer="BattleshipDBEntities" >
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="BattleshipDBModel.Game">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="TimeTakenMS" ColumnName="TimeTakenMS" />
+                <ScalarProperty Name="SimulationId" ColumnName="SimulationId" />
+                <ScalarProperty Name="GameNumber" ColumnName="GameNumber" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shots">
+            <EntityTypeMapping TypeName="BattleshipDBModel.Shot">
+              <MappingFragment StoreEntitySet="Shots">
+                <ScalarProperty Name="AIState" ColumnName="AIState" />
+                <ScalarProperty Name="TimeTakenMS" ColumnName="TimeTakenMS" />
+                <ScalarProperty Name="ShotNumber" ColumnName="ShotNumber" />
+                <ScalarProperty Name="InitialTargetY" ColumnName="InitialTargetY" />
+                <ScalarProperty Name="InitialTargetX" ColumnName="InitialTargetX" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="X" ColumnName="X" />
+                <ScalarProperty Name="DirectionId" ColumnName="DirectionId" />
+                <ScalarProperty Name="OrientationId" ColumnName="OrientationId" />
+                <ScalarProperty Name="ShipTypeId" ColumnName="ShipTypeId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="ShotId" ColumnName="ShotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Simulations">
+            <EntityTypeMapping TypeName="BattleshipDBModel.Simulation">
+              <MappingFragment StoreEntitySet="Simulation">
+                <ScalarProperty Name="AIType" ColumnName="AIType" />
+                <ScalarProperty Name="TimeTakenMS" ColumnName="TimeTakenMS" />
+                <ScalarProperty Name="SimulationDate" ColumnName="SimulationDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SimulationId" ColumnName="SimulationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

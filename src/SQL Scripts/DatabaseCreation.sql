@@ -7,6 +7,9 @@
 	CREATE DATABASE	[BattleshipDB];
 	GO
 
+	USE [BattleshipDB];
+	GO
+
 --	Tables
 	--Clean up
 	DROP TABLE	[dbo].[Shots];
@@ -63,11 +66,13 @@
 	);
 	GO
 
-	
+	--Simulation Table
 	CREATE TABLE	[dbo].[Simulation](
 		SimulationId	UNIQUEIDENTIFIER PRIMARY KEY NONCLUSTERED NOT NULL DEFAULT newsequentialid(),
 		[Description]	TEXT,
-		TimeTakenMS		INT	NOT NULL
+		SimulationDate	DATETIME DEFAULT GETDATE(),
+		TimeTakenMS		INT,
+		AIType			INT NOT NULL CONSTRAINT FK_AIType REFERENCES [dbo].[AIType](AITypeId)
 	);
 	GO
 
@@ -76,8 +81,7 @@
 		GameId			UNIQUEIDENTIFIER PRIMARY KEY NONCLUSTERED NOT NULL DEFAULT newsequentialid(),
 		GameNumber		INT NOT NULL,
 		SimulationId	UNIQUEIDENTIFIER NOT NULL CONSTRAINT FK_Simulation REFERENCES [dbo].[Simulation](SimulationId),
-		TimeTakenMS		INT NOT NULL,
-		AIType			INT NOT NULL CONSTRAINT FK_AIType REFERENCES [dbo].[AIType](AITypeId)
+		TimeTakenMS		INT,
 	);
 	GO
 
@@ -93,7 +97,7 @@
 		InitialTargetX	INT,
 		InitialTargetY	INT,
 		ShotNumber		INT NOT NULL,
-		TimeTakenMS		INT NOT NULL,
+		TimeTakenMS		INT,
 		AIState			INT NOT NULL CONSTRAINT FK_AIState REFERENCES [dbo].[AIStates](StateId)
 	);
 	GO
