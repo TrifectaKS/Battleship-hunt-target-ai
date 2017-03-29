@@ -18,14 +18,16 @@ namespace Battleships.DataAccess
 
         public void AddGames(List<Game> games)
         {
-            
-            Entity.Games.AddRange(games);
+
+            Entity.BulkInsert(games);
+            //Entity.Games.AddRange(games);
             Entity.BulkSaveChanges();
         }
 
         public void AddShots(List<Shot> shots)
         {
-            Entity.Shots.AddRange(shots);
+            Entity.BulkInsert(shots);
+            //Entity.Shots.AddRange(shots);
             Entity.BulkSaveChanges();
         }
     }

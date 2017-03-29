@@ -32,7 +32,7 @@
     </EntitySetMapping>
     <EntitySetMapping Name="Simulations">
       <EntityTypeMapping TypeName="BattleshipDBModel.Simulation">
-        <MappingFragment StoreEntitySet="Simulation">
+        <MappingFragment StoreEntitySet="Simulations">
           <ScalarProperty Name="AIType" ColumnName="AIType" />
           <ScalarProperty Name="TimeTakenMS" ColumnName="TimeTakenMS" />
           <ScalarProperty Name="SimulationDate" ColumnName="SimulationDate" />

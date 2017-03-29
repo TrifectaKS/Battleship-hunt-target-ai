@@ -14,7 +14,7 @@
 	--Clean up
 	DROP TABLE	[dbo].[Shots];
 	DROP TABLE	[dbo].[Games];
-	DROP TABLE	[dbo].[Simulation];
+	DROP TABLE	[dbo].[Simulations];
 	DROP TABLE	[dbo].[Directions];
 	DROP TABLE	[dbo].[Orientations];
 	DROP TABLE	[dbo].[ShotTypes];
@@ -67,7 +67,7 @@
 	GO
 
 	--Simulation Table
-	CREATE TABLE	[dbo].[Simulation](
+	CREATE TABLE	[dbo].[Simulations](
 		SimulationId	UNIQUEIDENTIFIER PRIMARY KEY NONCLUSTERED NOT NULL,
 		[Description]	TEXT,
 		SimulationDate	DATETIME DEFAULT GETDATE(),
@@ -80,7 +80,7 @@
 	CREATE TABLE	[dbo].[Games](
 		GameId			UNIQUEIDENTIFIER PRIMARY KEY NONCLUSTERED NOT NULL,
 		GameNumber		INT NOT NULL,
-		SimulationId	UNIQUEIDENTIFIER NOT NULL CONSTRAINT FK_Simulation REFERENCES [dbo].[Simulation](SimulationId),
+		SimulationId	UNIQUEIDENTIFIER NOT NULL CONSTRAINT FK_Simulation REFERENCES [dbo].[Simulations](SimulationId),
 		TimeTakenMS		INT,
 	);
 	GO
@@ -145,13 +145,38 @@
 				(0, 'SEA', 'SEA');
 	GO
 
+	--AIType Table
+	INSERT INTO	[dbo].[AIType]( AITypeId, AIType)
+	VALUES	(1, 'RandomAI'),
+			(2, 'HuntTargetAI'),
+			(3, 'ParityHuntTargetAI')	
+	GO
+
 
 	select * 
-	from dbo.Simulation
+	from dbo.Simulations
 
 	select	*
 	from	dbo.Games
-	ORDER BY 2
+	ORDER BY 3,2
 	
 	select	*
 	from	[dbo].Shots
+	order by 2, shotnumber
+
+	select	gme.GameId,
+			gme.GameNumber,
+			sht.ShotNumber,
+			sty.ShotType,
+			ship.Ship
+	from	dbo.Simulations sim join
+			dbo.games gme on(gme.SimulationId = sim.SimulationId) join
+			dbo.Shots sht on (sht.GameId = gme.GameId) join
+			dbo.ShotTypes sty on (sht.ShotTypeId = sty.ShotTypeId) join
+			dbo.ShipTypes ship on (sht.ShipTypeId = ship.ShipTypesId)
+	where sim.AIType = 1 and gme.gamenumber = 50
+	order by shotnumber asc
+	
+	delete from [dbo].[simulations]
+	delete from [dbo].[games]
+	delete from [dbo].[shots]

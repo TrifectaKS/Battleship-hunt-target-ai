@@ -32,7 +32,7 @@
           <Property Name="TimeTakenMS" Type="int" />
           <Property Name="AIState" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Simulation">
+        <EntityType Name="Simulations">
           <Key>
             <PropertyRef Name="SimulationId" />
           </Key>
@@ -55,10 +55,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Simulation">
-          <End Role="Simulation" Type="Self.Simulation" Multiplicity="1" />
+          <End Role="Simulations" Type="Self.Simulations" Multiplicity="1" />
           <End Role="Games" Type="Self.Games" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Simulation">
+            <Principal Role="Simulations">
               <PropertyRef Name="SimulationId" />
             </Principal>
             <Dependent Role="Games">
@@ -69,13 +69,13 @@
         <EntityContainer Name="BattleshipDBModelStoreContainer">
           <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shots" EntityType="Self.Shots" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Simulation" EntityType="Self.Simulation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Simulations" EntityType="Self.Simulations" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Game" Association="Self.FK_Game">
             <End Role="Games" EntitySet="Games" />
             <End Role="Shots" EntitySet="Shots" />
           </AssociationSet>
           <AssociationSet Name="FK_Simulation" Association="Self.FK_Simulation">
-            <End Role="Simulation" EntitySet="Simulation" />
+            <End Role="Simulations" EntitySet="Simulations" />
             <End Role="Games" EntitySet="Games" />
           </AssociationSet>
         </EntityContainer>
@@ -198,7 +198,7 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Simulations">
             <EntityTypeMapping TypeName="BattleshipDBModel.Simulation">
-              <MappingFragment StoreEntitySet="Simulation">
+              <MappingFragment StoreEntitySet="Simulations">
                 <ScalarProperty Name="AIType" ColumnName="AIType" />
                 <ScalarProperty Name="TimeTakenMS" ColumnName="TimeTakenMS" />
                 <ScalarProperty Name="SimulationDate" ColumnName="SimulationDate" />

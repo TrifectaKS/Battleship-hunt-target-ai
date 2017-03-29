@@ -79,6 +79,7 @@
     <Compile Include="DataAccess\Connection.cs" />
     <Compile Include="DataAccess\DbInsert.cs" />
     <Compile Include="DataAccess\DbRepository.cs" />
+    <Compile Include="Enums\AIType.cs" />
     <Compile Include="Enums\DirectionTaken.cs" />
     <Compile Include="Enums\Orientation.cs" />
     <Compile Include="Enums\ShotType.cs" />

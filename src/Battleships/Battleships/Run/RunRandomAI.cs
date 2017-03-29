@@ -1,5 +1,6 @@
 ﻿using Battleships.Algorithms;
 using Battleships.DataAccess;
+using Battleships.Enums;
 using Battleships.File_Operations;
 using Battleships.Functions;
 using Battleships.Objects;
@@ -15,15 +16,13 @@ namespace Battleships.Test
 {
     class RunRandomAI
     {
-        const int SIZE = 10;
-        const int ITERATIONS = 1000;
-        public static void Run()
+        public static void Run(int size, int iterations, string simDesc, string boardPath)
         {
-            Statistics stats = new Statistics(new Simulation() {SimulationId = Guid.NewGuid(), Description = "Random AI", SimulationDate = DateTime.Now });
+            Statistics stats = new Statistics(new Simulation() {SimulationId = Guid.NewGuid(), Description = simDesc, SimulationDate = DateTime.Now, AIType = (int)AIType.Random});
 
             try
             {
-                for (int i = 0; i < ITERATIONS; i++)
+                for (int i = 0; i < iterations; i++)
                 {
                     Game game = new Game();
                     game.GameId = Guid.NewGuid();
@@ -31,8 +30,8 @@ namespace Battleships.Test
                     game.GameNumber = i + 1;
 
 
-                    string s = Files.Read(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
-                    Board board = GridParser.Parse(s, SIZE);
+                    string s = Files.Read(boardPath);
+                    Board board = GridParser.Parse(s, size);
                     RandomAI RandAI = new RandomAI(board, game.GameId);
                     stats.Shots.AddRange(RandAI.Play());
                     stats.Games.Add(game);
