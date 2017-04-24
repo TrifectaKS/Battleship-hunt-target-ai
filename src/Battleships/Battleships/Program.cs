@@ -3,6 +3,7 @@ using Battleships.File_Operations;
 using Battleships.Functions;
 using Battleships.Objects;
 using Battleships.Parsing;
+using Battleships.Run;
 using Battleships.Test;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace Battleships
         static void Main(string[] args)
         {
             //Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt")
-            RunRandomAI.Run(10,100,"Test Run 2", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
+            //RunRandomAI.Run(10,1000,"Test Run 4", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
+            RunHuntTargetAI.Run(10, 100,"Hunt Target", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
 
             Console.ReadKey();
         }

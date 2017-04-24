@@ -26,8 +26,10 @@
           <Property Name="DirectionId" Type="int" />
           <Property Name="X" Type="int" Nullable="false" />
           <Property Name="Y" Type="int" Nullable="false" />
+          <Property Name="Val" Type="int" Nullable="false" />
           <Property Name="InitialTargetX" Type="int" />
           <Property Name="InitialTargetY" Type="int" />
+          <Property Name="InitialVal" Type="int" />
           <Property Name="ShotNumber" Type="int" Nullable="false" />
           <Property Name="TimeTakenMS" Type="int" />
           <Property Name="AIState" Type="int" Nullable="false" />
@@ -119,8 +121,10 @@
           <Property Name="DirectionId" Type="Int32" />
           <Property Name="X" Type="Int32" Nullable="false" />
           <Property Name="Y" Type="Int32" Nullable="false" />
+          <Property Name="Val" Type="Int32" Nullable="false" />
           <Property Name="InitialTargetX" Type="Int32" />
           <Property Name="InitialTargetY" Type="Int32" />
+          <Property Name="InitialVal" Type="Int32" />
           <Property Name="ShotNumber" Type="Int32" Nullable="false" />
           <Property Name="TimeTakenMS" Type="Int32" />
           <Property Name="AIState" Type="Int32" Nullable="false" />
@@ -183,8 +187,10 @@
                 <ScalarProperty Name="AIState" ColumnName="AIState" />
                 <ScalarProperty Name="TimeTakenMS" ColumnName="TimeTakenMS" />
                 <ScalarProperty Name="ShotNumber" ColumnName="ShotNumber" />
+                <ScalarProperty Name="InitialVal" ColumnName="InitialVal" />
                 <ScalarProperty Name="InitialTargetY" ColumnName="InitialTargetY" />
                 <ScalarProperty Name="InitialTargetX" ColumnName="InitialTargetX" />
+                <ScalarProperty Name="Val" ColumnName="Val" />
                 <ScalarProperty Name="Y" ColumnName="Y" />
                 <ScalarProperty Name="X" ColumnName="X" />
                 <ScalarProperty Name="DirectionId" ColumnName="DirectionId" />

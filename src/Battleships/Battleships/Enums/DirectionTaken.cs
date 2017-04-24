@@ -8,10 +8,10 @@ namespace Battleships.Enums
 {
     public enum DirectionTaken
     {
-        Up = 8,
+        Up = 1,
         Down = 2,
-        Left = 4,
-        Right = 6,
-        Random = 5
+        Left = 3,
+        Right = 4,
+        Random = 0
     }
 }

@@ -95,8 +95,10 @@
 		DirectionId		INT CONSTRAINT FK_Direction REFERENCES [dbo].[Directions](DirectionId),
 		X				INT NOT NULL,
 		Y				INT NOT NULL,
+		Val				INT	NOT NULL,
 		InitialTargetX	INT,
 		InitialTargetY	INT,
+		InitialVal		INT,
 		ShotNumber		INT NOT NULL,
 		TimeTakenMS		INT,
 		AIState			INT NOT NULL CONSTRAINT FK_AIState REFERENCES [dbo].[AIStates](StateId)
@@ -107,11 +109,11 @@
 
 	---Directions Table
 	INSERT INTO	[dbo].[Directions](DirectionId, Direction)
-		VALUES	(8, 'UP'),
+		VALUES	(1, 'UP'),
 				(2, 'DOWN'),
-				(4, 'LEFT'),
-				(6, 'RIGHT'),
-				(5, 'RANDOM');
+				(3, 'LEFT'),
+				(4, 'RIGHT'),
+				(0, 'RANDOM');
 	GO
 
 	---Orientations Table
@@ -175,7 +177,7 @@
 			dbo.ShotTypes sty on (sht.ShotTypeId = sty.ShotTypeId) join
 			dbo.ShipTypes ship on (sht.ShipTypeId = ship.ShipTypesId)
 	where sim.AIType = 1 and gme.gamenumber = 50
-	order by shotnumber asc
+	order by gameid, shotnumber asc
 	
 	delete from [dbo].[simulations]
 	delete from [dbo].[games]

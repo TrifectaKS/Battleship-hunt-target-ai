@@ -36,8 +36,10 @@
     <Property Name="DirectionId" Type="Int32" />
     <Property Name="X" Type="Int32" Nullable="false" />
     <Property Name="Y" Type="Int32" Nullable="false" />
+    <Property Name="Val" Type="Int32" Nullable="false" />
     <Property Name="InitialTargetX" Type="Int32" />
     <Property Name="InitialTargetY" Type="Int32" />
+    <Property Name="InitialVal" Type="Int32" />
     <Property Name="ShotNumber" Type="Int32" Nullable="false" />
     <Property Name="TimeTakenMS" Type="Int32" />
     <Property Name="AIState" Type="Int32" Nullable="false" />

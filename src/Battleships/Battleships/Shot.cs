@@ -22,8 +22,10 @@ namespace Battleships
         public Nullable<int> DirectionId { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public int Val { get; set; }
         public Nullable<int> InitialTargetX { get; set; }
         public Nullable<int> InitialTargetY { get; set; }
+        public Nullable<int> InitialVal { get; set; }
         public int ShotNumber { get; set; }
         public Nullable<int> TimeTakenMS { get; set; }
         public int AIState { get; set; }

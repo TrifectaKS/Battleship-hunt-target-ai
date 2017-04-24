@@ -20,14 +20,12 @@ namespace Battleships.DataAccess
         {
 
             Entity.BulkInsert(games);
-            //Entity.Games.AddRange(games);
             Entity.BulkSaveChanges();
         }
 
         public void AddShots(List<Shot> shots)
         {
             Entity.BulkInsert(shots);
-            //Entity.Shots.AddRange(shots);
             Entity.BulkSaveChanges();
         }
     }

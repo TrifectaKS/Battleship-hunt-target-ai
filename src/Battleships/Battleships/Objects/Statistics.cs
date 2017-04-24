@@ -17,8 +17,7 @@ namespace Battleships.Objects
             Games = new List<Game>();
             Simulation = s;
         }
-
-        private int hits, misses, shots;
+        
         public Simulation Simulation { get; set; }
         public List<Shot> Shots { get; set; }
         public List<Game> Games { get; set; }

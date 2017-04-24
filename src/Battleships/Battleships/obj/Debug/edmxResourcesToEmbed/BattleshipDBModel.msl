@@ -17,8 +17,10 @@
           <ScalarProperty Name="AIState" ColumnName="AIState" />
           <ScalarProperty Name="TimeTakenMS" ColumnName="TimeTakenMS" />
           <ScalarProperty Name="ShotNumber" ColumnName="ShotNumber" />
+          <ScalarProperty Name="InitialVal" ColumnName="InitialVal" />
           <ScalarProperty Name="InitialTargetY" ColumnName="InitialTargetY" />
           <ScalarProperty Name="InitialTargetX" ColumnName="InitialTargetX" />
+          <ScalarProperty Name="Val" ColumnName="Val" />
           <ScalarProperty Name="Y" ColumnName="Y" />
           <ScalarProperty Name="X" ColumnName="X" />
           <ScalarProperty Name="DirectionId" ColumnName="DirectionId" />

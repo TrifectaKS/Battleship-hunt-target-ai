@@ -37,16 +37,16 @@ namespace Battleships.Algorithms
             while (ShipsDestroyed != Ship.NUM_OF_SHIPS)
             {
                 ShotNumber++;
-                Shoot();
+
+                Shots.Add(Shoot());
             }
 
             return Shots;
         }
 
-        private void Shoot()
+        private Shot Shoot()
         {
             Coordinates c = GetCoordinates(GetCellNumber());
-            //Console.WriteLine("Shot num " + ShotNumber + " x " + c.X + " y " + c.Y);
             Shot result = Board.Grid[c.X, c.Y].Shoot();
              
             result.ShotId = Guid.NewGuid();
@@ -58,10 +58,11 @@ namespace Battleships.Algorithms
             result.OrientationId = (int)Orientation.Random;
             result.ShotNumber = ShotNumber;
             result.AIState = (int)State.Random;
-
-            Shots.Add(result);
-
+            result.Val = c.Val;
+            
             if (result.ShotTypeId == (int)ShotType.Destroyed) ShipsDestroyed++;
+
+            return result;
         }
     }
 }

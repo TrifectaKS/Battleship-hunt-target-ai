@@ -21,8 +21,10 @@
     <Property Name="DirectionId" Type="int" />
     <Property Name="X" Type="int" Nullable="false" />
     <Property Name="Y" Type="int" Nullable="false" />
+    <Property Name="Val" Type="int" Nullable="false" />
     <Property Name="InitialTargetX" Type="int" />
     <Property Name="InitialTargetY" Type="int" />
+    <Property Name="InitialVal" Type="int" />
     <Property Name="ShotNumber" Type="int" Nullable="false" />
     <Property Name="TimeTakenMS" Type="int" />
     <Property Name="AIState" Type="int" Nullable="false" />

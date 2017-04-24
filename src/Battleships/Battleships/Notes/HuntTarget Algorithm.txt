@@ -1,15 +1,4 @@
-﻿Hunt:
-	Shoot
-	If ShotResult = Hit
-		Target
-
-Target:
-	
-
-
-
-
-	0	1	2	3	4	5	6	7	8	9	10	11	12
+﻿	0	1	2	3	4	5	6	7	8	9
 
 0	~	~	~	~	~	~	~	~	~	~
 
@@ -31,8 +20,183 @@ Target:
 	
 9	~	~	~	~	~	~	~	~	~	~
 
-10
 
-11
 
-12
+
+BEST CASE
+                   
+  0 1 2 3 4 5 6 7
+0 - - - - - - - -
+1 - - - - - - - -
+2 - - - X - - - -
+3 - - - X o - - -
+4 - - - X - - - -
+5 - - - X - - - -
+6 - - - x - - - -
+7 - - - - - - - -    
+
+INITIAL - 4,3 HIT
+INITIAL TARGET + 1  - RIGHT - 5,3 MISS 
+INITIAL TARGET + SIZE - DOWN - 4,4 HIT - SET ORIENTATION TO VERTICAL
+Hits.last + size - DOWN - 4,5 HIT
+DOWN - 4,6 MISS
+                
+GO TO INITIAL TARGET - 4,3
+INITIAL TARGET - SIZE - 3,1 DESTROYED
+
+When destroyed, check targetshots list for cells containing undestroyed ships
+set new initial target with first one found
+
+
+
+
+
+	0	1	2	3	4	5	6	7	8	9
+
+0	~	~	~	~	~	~	~	~	~	~
+
+1	~	~	~	~	~	~	~	~	~	~
+
+2	~	4	4	X	4	~	~	~	~	~
+
+3	~	~	~	x	~	~	~	~	~	~
+
+4	~	~	~	X	O	~	~	~	~	~
+	
+5	~	~	~	X	~	~	~	~	~	~
+
+6	~	~	~	X	~	~	~	~	~	~
+
+7	~	~	~	X	~	~	~	~	~	~
+	
+8	~	~	~	2	~	~	~	~	~	~
+	
+9	~	~	~	2	~	~	~	~	~	~
+
+
+Hunt 1:
+	If hit
+		isHunting -> false
+		targetCoords.add(coordinates of hit)
+		targetDirection = random
+		orientation = random
+
+Target 1:
+Orientation Random
+	Available Shots:
+		34 - UP 
+		45 - RIGHT
+		43 - LEFT 
+		54 - DOWN
+
+	result = Shoot(1) (random depending on available shots list)
+	add result to list
+Target 2: 
+Orientation Random
+	Available Shots:
+		34 - UP 
+		43 - LEFT 
+		54 - DOWN
+		result = Shoot(0)
+		if hit
+			TargetOrientation = Vertical
+		add result to list
+.
+.
+.
+.
+.
+Target 5:
+Orientation vertical
+	Available Shots:
+		23 - UP
+		83 - DOWN		
+		result = shoot(0)
+			hit
+			
+
+Target 6:
+Orientation vertical
+	Available Shots:
+		14 - UP
+		83 - DOWN		
+		result = shoot(0)
+			miss
+			if result is up,
+				direction down
+			
+
+Target 7:
+Orientation vertical
+	Available Shots:
+		83 - DOWN		
+		result = shoot(0)
+			destroyed
+				get destroyed ship id = shipid
+				loop through targetshots
+					if shipid=targetshot
+						remove element
+
+				orientation = random
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GET AVAILABLE SHOTS(orientation, direction)
+
+if orientation = random	
+	Direction Right?
+		Available Shots:
+			RIGHT
+
+	Direction Up?
+		Available Shots:
+			UP 
+	
+	Direction Left?
+		Available Shots:
+			LEFT 
+
+	Direction Down?
+		Available Shots:
+			DOWN
+	Direction Random?
+		Available Shots:
+			UP 
+			DOWN
+			LEFT 
+			RIGHT
+
+else if orientation = horizontal
+		Available Shots:
+			LEFT 
+			RIGHT
+else if orientation = vertical
+		Available Shots:
+			UP 
+			DOWN
+
+
+
+
+	0	1	2	3	4	5
+0	0	1	2	3	4	5
+1	6	7	8	9	10	11
+2	12	13	14	15	16	17
+3
+4
+5
