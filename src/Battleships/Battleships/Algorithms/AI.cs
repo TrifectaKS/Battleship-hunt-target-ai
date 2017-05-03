@@ -52,30 +52,28 @@ namespace Battleships.Algorithms
             if (o == Orientation.Random)
             {
                 t = GetAdjecentTarget(c, DirectionTaken.Up);
-                if (t != null || !Board.Grid[c.X, c.Y].IsShot) tempCoords.Add(t);
-
+                if (t != null && !Board.Grid[c.X, c.Y - 1].IsShot) tempCoords.Add(t);
                 t = GetAdjecentTarget(c, DirectionTaken.Down);
-                if (t != null || !Board.Grid[c.X, c.Y].IsShot) tempCoords.Add(t);
-
+                if (t != null && !Board.Grid[c.X, c.Y + 1].IsShot) tempCoords.Add(t);
                 t = GetAdjecentTarget(c, DirectionTaken.Left);
-                if (t != null || !Board.Grid[c.X, c.Y].IsShot) tempCoords.Add(t);
-
+                if (t != null && !Board.Grid[c.X - 1, c.Y].IsShot) tempCoords.Add(t);
                 t = GetAdjecentTarget(c, DirectionTaken.Right);
-                if (t != null || !Board.Grid[c.X, c.Y].IsShot) tempCoords.Add(t);
+                if (t != null && !Board.Grid[c.X + 1, c.Y].IsShot) tempCoords.Add(t);
+
             }
             else if (o == Orientation.Vertical)
             {
                 t = GetAdjecentTarget(c, DirectionTaken.Up);
-                if (t != null || !Board.Grid[c.X, c.Y].IsShot) tempCoords.Add(t);
+                if (t != null && !Board.Grid[c.X, c.Y-1].IsShot) tempCoords.Add(t);
                 t = GetAdjecentTarget(c, DirectionTaken.Down);
-                if (t != null || !Board.Grid[c.X, c.Y].IsShot) tempCoords.Add(t);
+                if (t != null && !Board.Grid[c.X, c.Y+1].IsShot) tempCoords.Add(t);
             }
             else if (o == Orientation.Horizontal)
             {
                 t = GetAdjecentTarget(c, DirectionTaken.Left);
-                if (t != null || !Board.Grid[c.X, c.Y].IsShot) tempCoords.Add(t);
+                if (t != null && !Board.Grid[c.X-1, c.Y].IsShot) tempCoords.Add(t);
                 t = GetAdjecentTarget(c, DirectionTaken.Right);
-                if (t != null || !Board.Grid[c.X, c.Y].IsShot) tempCoords.Add(t);
+                if (t != null && !Board.Grid[c.X+1, c.Y].IsShot) tempCoords.Add(t);
             }
             return tempCoords;
         }

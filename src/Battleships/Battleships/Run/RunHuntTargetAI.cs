@@ -2,6 +2,7 @@
 using Battleships.DataAccess;
 using Battleships.Enums;
 using Battleships.File_Operations;
+using Battleships.Functions;
 using Battleships.Objects;
 using Battleships.Parsing;
 using System;
@@ -32,7 +33,7 @@ namespace Battleships.Run
                     HuntTargetAI RandAI = new HuntTargetAI(board, game.GameId);
                     stats.Shots.AddRange(RandAI.Play());
                     stats.Games.Add(game);
-                    // Display.Grid(board);
+                    Display.Grid(board);
                 }
 
                 DbInsert.Insert(stats);

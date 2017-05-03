@@ -21,8 +21,8 @@ namespace Battleships
         {
             //Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt")
             //RunRandomAI.Run(10,1000,"Test Run 4", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
-            RunHuntTargetAI.Run(10, 100,"Hunt Target", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
-
+            RunHuntTargetAI.Run(10, 1,"Hunt Target", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Grids\", "Grid1.txt"));
+            
             Console.ReadKey();
         }
     }

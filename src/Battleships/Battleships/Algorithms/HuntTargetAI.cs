@@ -43,16 +43,19 @@ namespace Battleships.Algorithms
                 }else
                 {
                     result = Target();
-                    if(result.ShotTypeId == (int)ShotType.Hit)
+                    if (result.ShotTypeId != (int)ShotType.Missed)
                     {
-                        TargetCoords.Add(new Coordinates { X = result.X, Y = result.Y, Val = result.InitialVal.GetValueOrDefault() });
-                    }
-                    else if (result.ShotTypeId == (int)ShotType.Destroyed)
-                    {
-                        isHunting = true;
-                        ShipsDestroyed++;
-                        OrientationFound = false;
-                        PossibleTargets = new List<Coordinates>();
+                        if (result.ShotTypeId == (int)ShotType.Hit)
+                        {
+                            TargetCoords.Add(new Coordinates { X = result.X, Y = result.Y, Val = result.InitialVal.GetValueOrDefault() });
+                        }
+                        else if (result.ShotTypeId == (int)ShotType.Destroyed)
+                        {
+                            isHunting = true;
+                            ShipsDestroyed++;
+                            OrientationFound = false;
+                            PossibleTargets = new List<Coordinates>();
+                        }
                     }
                 }
 
@@ -111,6 +114,7 @@ namespace Battleships.Algorithms
             {
                 PossibleTargets = GetAdjecentTarget(TargetCoords[0], TargetOrientation);
                 PossibleTargets.AddRange(GetAdjecentTarget(TargetCoords[TargetCoords.Count - 1], TargetOrientation));
+                //TODO: IMPLEMENT
 
             }
             return result;
