@@ -22,6 +22,7 @@ namespace Battleships.Test
 
             try
             {
+                Random random = new Random();
                 for (int i = 0; i < iterations; i++)
                 {
                     Game game = new Game();
@@ -32,7 +33,7 @@ namespace Battleships.Test
 
                     string s = Files.Read(boardPath);
                     Board board = GridParser.Parse(s, size);
-                    RandomAI RandAI = new RandomAI(board, game.GameId);
+                    RandomAI RandAI = new RandomAI(board, game.GameId, random);
                     stats.Shots.AddRange(RandAI.Play());
                     stats.Games.Add(game);
                    // Display.Grid(board);

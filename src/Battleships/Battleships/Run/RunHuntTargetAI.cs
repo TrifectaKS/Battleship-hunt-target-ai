@@ -21,6 +21,7 @@ namespace Battleships.Run
 
             try
             {
+                Random random = new Random();
                 for (int i = 0; i < iterations; i++)
                 {
                     Game game = new Game();
@@ -30,10 +31,10 @@ namespace Battleships.Run
                     
                     string s = Files.Read(boardPath);
                     Board board = GridParser.Parse(s, size);
-                    HuntTargetAI RandAI = new HuntTargetAI(board, game.GameId);
+                    HuntTargetAI RandAI = new HuntTargetAI(board, game.GameId, random);
                     stats.Shots.AddRange(RandAI.Play());
                     stats.Games.Add(game);
-                    Display.Grid(board);
+                    //Display.Grid(board);
                 }
 
                 DbInsert.Insert(stats);

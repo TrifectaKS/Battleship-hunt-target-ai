@@ -11,7 +11,7 @@ namespace Battleships.Algorithms
 {
     class RandomAI:AI
     {
-        public RandomAI(Board board, Guid guid):base(board, guid)
+        public RandomAI(Board board, Guid guid, Random rand):base(board, guid, rand)
         {
             init();
         }

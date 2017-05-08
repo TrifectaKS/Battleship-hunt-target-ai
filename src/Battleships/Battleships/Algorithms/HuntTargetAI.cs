@@ -1,4 +1,5 @@
 ﻿using Battleships.Enums;
+using Battleships.Functions;
 using Battleships.Objects;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,23 @@ namespace Battleships.Algorithms
 {
     class HuntTargetAI : AI
     {
-        private Random Rand { get; set; }
-        private List<int> ShotHistory { get; set; }
         private List<Coordinates> TargetCoords { get; set; }
         private Orientation TargetOrientation { get; set; }
+        private DirectionTaken TargetDirection { get; set; }
         private List<Coordinates> PossibleTargets { get; set; }
-        private bool OrientationFound { get; set; }
-        public HuntTargetAI(Board board, Guid guid):base(board,guid)
+
+        public HuntTargetAI(Board board, Guid guid, Random rand):base(board,guid, rand)
         {
             init();
+            TargetOrientation = Orientation.Random;
+            TargetDirection = DirectionTaken.Random;
             TargetCoords = new List<Coordinates>();
             PossibleTargets = new List<Coordinates>();
-            OrientationFound = false;
         }
 
         public List<Shot> Play()
         {
             bool isHunting = true;
-            OrientationFound = false;
             Shot result;
 
             while (ShipsDestroyed != Ship.NUM_OF_SHIPS)
@@ -53,8 +53,10 @@ namespace Battleships.Algorithms
                         {
                             isHunting = true;
                             ShipsDestroyed++;
-                            OrientationFound = false;
-                            PossibleTargets = new List<Coordinates>();
+                            TargetDirection = DirectionTaken.Random;
+                            TargetOrientation = Orientation.Random;
+                            PossibleTargets.Clear();
+                            TargetCoords.Clear();
                         }
                     }
                 }
@@ -90,33 +92,35 @@ namespace Battleships.Algorithms
         {
             Shot result = null;
 
-            if (!OrientationFound)
+            PossibleTargets.Clear();
+
+            foreach (Coordinates crd in TargetCoords)
             {
-                PossibleTargets = GetAdjecentTarget(TargetCoords[0], Orientation.Random);
-                int randomIndex = GenerateRandom(0,PossibleTargets.Count);
-                result = Board.Grid[PossibleTargets[randomIndex].X, PossibleTargets[randomIndex].Y].Shoot();
-                if(result.ShotTypeId == (int)ShotType.Hit)
-                {
-                    OrientationFound = true;
-                    TargetOrientation = FindOrientation(TargetCoords[0], PossibleTargets[randomIndex]);
-                }
-
-                result.ShotId = Guid.NewGuid();
-                result.GameId = GameGuid;
-                result.AIState = (int)State.Target;
-                result.DirectionId = (int)DirectionTaken.Random;
-                result.X = PossibleTargets[randomIndex].X;
-                result.Y = PossibleTargets[randomIndex].Y;
-                result.OrientationId = (int)TargetOrientation;
-                result.ShotNumber = ShotNumber;
-
-            }else
-            {
-                PossibleTargets = GetAdjecentTarget(TargetCoords[0], TargetOrientation);
-                PossibleTargets.AddRange(GetAdjecentTarget(TargetCoords[TargetCoords.Count - 1], TargetOrientation));
-                //TODO: IMPLEMENT
-
+                PossibleTargets.AddRange(GetAdjacentTargets(crd, TargetOrientation, TargetDirection));
             }
+
+            int randomIndex = GenerateRandom(0, PossibleTargets.Count);
+            result = Board.Grid[PossibleTargets[randomIndex].X, PossibleTargets[randomIndex].Y].Shoot();
+
+            result.ShotId = Guid.NewGuid();
+            result.GameId = GameGuid;
+            result.AIState = (int)State.Target;
+            result.DirectionId = (int)TargetOrientation;
+            result.X = PossibleTargets[randomIndex].X;
+            result.Y = PossibleTargets[randomIndex].Y;
+            result.OrientationId = (int)TargetOrientation;
+            result.ShotNumber = ShotNumber;
+
+            if (TargetOrientation == Orientation.Random && result.ShotTypeId == (int)ShotType.Hit)
+            {
+                TargetOrientation = FindOrientation(TargetCoords[0], PossibleTargets[randomIndex]);
+            }
+            else if (TargetOrientation != Orientation.Random && result.ShotTypeId == (int)ShotType.Missed)
+            {
+                TargetDirection = GetOppositeDirection(FindDirection(TargetOrientation, TargetCoords[0], new Coordinates { X = result.X, Y = result.Y }));
+            }
+
+
             return result;
         }
         

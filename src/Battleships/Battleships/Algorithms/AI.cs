@@ -20,19 +20,19 @@ namespace Battleships.Algorithms
         internal Guid GameGuid { get; set; }
         internal const int CountStart = 0;
 
-        public AI(Board board, Guid guid)
+        public AI(Board board, Guid guid, Random randGen)
         {
             Board = board;
             GameGuid = guid;
             ShipsDestroyed = 0;
             ShotNumber = 0;
+            Rand = randGen;
             Grid = new int[Board.Size, Board.Size];
             ShotsAvailable = new List<int>();
-            Rand = new Random();
             Shots = new List<Shot>();
         }
         
-        internal Coordinates GetAdjecentTarget(Coordinates c, DirectionTaken d)
+        internal Coordinates GetAdjecentCellCoordinates(Coordinates c, DirectionTaken d)
         {
             switch (d)
             {
@@ -45,35 +45,45 @@ namespace Battleships.Algorithms
             return null;
         }
 
-        internal List<Coordinates> GetAdjecentTarget(Coordinates c, Orientation o)
+        internal List<Coordinates> GetAdjacentTargets(Coordinates c, Orientation o, DirectionTaken dt)
         {
             List<Coordinates> tempCoords = new List<Coordinates>();
-            Coordinates t;
-            if (o == Orientation.Random)
-            {
-                t = GetAdjecentTarget(c, DirectionTaken.Up);
-                if (t != null && !Board.Grid[c.X, c.Y - 1].IsShot) tempCoords.Add(t);
-                t = GetAdjecentTarget(c, DirectionTaken.Down);
-                if (t != null && !Board.Grid[c.X, c.Y + 1].IsShot) tempCoords.Add(t);
-                t = GetAdjecentTarget(c, DirectionTaken.Left);
-                if (t != null && !Board.Grid[c.X - 1, c.Y].IsShot) tempCoords.Add(t);
-                t = GetAdjecentTarget(c, DirectionTaken.Right);
-                if (t != null && !Board.Grid[c.X + 1, c.Y].IsShot) tempCoords.Add(t);
+            Coordinates t = null;
 
-            }
-            else if (o == Orientation.Vertical)
+            if (dt != DirectionTaken.Random)
             {
-                t = GetAdjecentTarget(c, DirectionTaken.Up);
-                if (t != null && !Board.Grid[c.X, c.Y-1].IsShot) tempCoords.Add(t);
-                t = GetAdjecentTarget(c, DirectionTaken.Down);
-                if (t != null && !Board.Grid[c.X, c.Y+1].IsShot) tempCoords.Add(t);
+                t = GetAdjecentCellCoordinates(c, dt);
+                if (t!= null && !Board.Grid[t.X, t.Y].IsShot)
+                    tempCoords.Add(t);
             }
-            else if (o == Orientation.Horizontal)
+            else
             {
-                t = GetAdjecentTarget(c, DirectionTaken.Left);
-                if (t != null && !Board.Grid[c.X-1, c.Y].IsShot) tempCoords.Add(t);
-                t = GetAdjecentTarget(c, DirectionTaken.Right);
-                if (t != null && !Board.Grid[c.X+1, c.Y].IsShot) tempCoords.Add(t);
+                if (o == Orientation.Random)
+                {
+                    t = GetAdjecentCellCoordinates(c, DirectionTaken.Up);
+                    if (t != null && !Board.Grid[t.X, t.Y].IsShot) tempCoords.Add(t);
+                    t = GetAdjecentCellCoordinates(c, DirectionTaken.Down);
+                    if (t != null && !Board.Grid[t.X, t.Y].IsShot) tempCoords.Add(t);
+                    t = GetAdjecentCellCoordinates(c, DirectionTaken.Left);
+                    if (t != null && !Board.Grid[t.X, t.Y].IsShot) tempCoords.Add(t);
+                    t = GetAdjecentCellCoordinates(c, DirectionTaken.Right);
+                    if (t != null && !Board.Grid[t.X, t.Y].IsShot) tempCoords.Add(t);
+
+                }
+                else if (o == Orientation.Vertical)
+                {
+                    t = GetAdjecentCellCoordinates(c, DirectionTaken.Up);
+                    if (t != null && !Board.Grid[t.X, t.Y].IsShot) tempCoords.Add(t);
+                    t = GetAdjecentCellCoordinates(c, DirectionTaken.Down);
+                    if (t != null && !Board.Grid[t.X, t.Y].IsShot) tempCoords.Add(t);
+                }
+                else if (o == Orientation.Horizontal)
+                {
+                    t = GetAdjecentCellCoordinates(c, DirectionTaken.Left);
+                    if (t != null && !Board.Grid[t.X, t.Y].IsShot) tempCoords.Add(t);
+                    t = GetAdjecentCellCoordinates(c, DirectionTaken.Right);
+                    if (t != null && !Board.Grid[t.X, t.Y].IsShot) tempCoords.Add(t);
+                }
             }
             return tempCoords;
         }
@@ -97,9 +107,36 @@ namespace Battleships.Algorithms
 
         internal Orientation FindOrientation(Coordinates c1, Coordinates c2)
         {
-            if (c1.X == c2.X) return Orientation.Horizontal;
-            else if (c1.Y == c2.Y) return Orientation.Vertical;
+            if (c1.X == c2.X) return Orientation.Vertical;
+            else if (c1.Y == c2.Y) return Orientation.Horizontal;
             else return Orientation.Random;
+        }
+
+        internal DirectionTaken FindDirection(Orientation o, Coordinates c1, Coordinates c2)
+        {
+            if(o == Orientation.Horizontal)
+            {
+                if (c2.X - c1.X < 0) return DirectionTaken.Left;
+                else return DirectionTaken.Right;
+            }
+            else if(o == Orientation.Vertical)
+            {
+                if (c2.Y - c1.Y < 0) return DirectionTaken.Up;
+                else return DirectionTaken.Down;
+            }
+            else
+            {
+                return FindDirection(FindOrientation(c1, c2), c1, c2);
+            }
+        }
+
+        internal DirectionTaken GetOppositeDirection(DirectionTaken dt)
+        {
+            if (dt == DirectionTaken.Left) return DirectionTaken.Right;
+            else if (dt == DirectionTaken.Right) return DirectionTaken.Left;
+            else if (dt == DirectionTaken.Up) return DirectionTaken.Down;
+            else if (dt == DirectionTaken.Down) return DirectionTaken.Up;
+            else return DirectionTaken.Random;
         }
 
         internal Coordinates GetCoordinates(int val)
