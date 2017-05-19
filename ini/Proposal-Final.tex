@@ -82,28 +82,55 @@
 \textbf{Research Question / Aim:} Identifying and implementing an efficient Battleship AI algorithm by using educated guessing and a probabilistic approach.\\\\
 \textbf{Objectives:} 
 \begin{enumerate}
-	\item \textbf{Research} different techniques that can reduce the amount of shots it takes to win the game.
-	\item \textbf{Develop} a prototype that uses two basic techniques based on guessing and has the ability to play the game for a given number of times to gather data.
-	\item \textbf{Analyse} the effectiveness of each guessing algorithm.
+	\item \textbf{Research}
+	    \begin{enumerate}
+	        \item Research the rules of the game and various techniques that humans use to efficiently play the game.
+	        \item Research current algorithms that can efficiently win a game of Battleships
+	        \item Research techniques to implement an efficient algorithm that can finish a game of Battleships in as little tries as possible
+	    \end{enumerate}
+	\item \textbf{Development}
+    	\begin{enumerate}
+    	    \item Create multiple boards that the simulations of the different algorithms will run on
+    	    \item Develop utilities that will be used, including a database, database handlers and a file parser
+    	    \item Develop the logic and rules of the game
+    	    \item Develop three algorithms that can be simulated for a defined amount of times
+    	    \item Develop a way to record every move done in each simulation
+    	\end{enumerate}
+	\item \textbf{Analysis}
+	    \begin{enumerate}
+	        \item Analyse the efficiency of each algorithm on different datasets
+	        \item Analyse and compare the overall efficiency of the algorithms used
+	        \item Identify the limitations of the prototype
+	        \item Identify the most efficient algorithm
+	        \item Identify the improvements that can be made on the best performing algorithm
+	    \end{enumerate}
 \end{enumerate}
 
-\textbf{Rationale:} There are many different variations of Battleship AI, each taking a different approach to solve the problem. This research will compare the most common approaches and an implementation that combines the most efficient approaches will be developed, tried and tested against the existing algorithms. This will be done by analysing the average amount of shots each algorithm takes to win a single games for a set amount of times. This data will be compared with the new algorithm and its efficiency is deduced.\\\\
+\textbf{Rationale:} There are many different variations of Battleship AI, each taking a different approach to solve the problem. This research will compare the different approaches. An implementation that combines the most efficient approaches will be developed, tried and tested against the existing algorithms. This will be done by analysing the average amount of shots each algorithm takes to win a single games for a set amount of times. This data will be compared with the new algorithm and its efficiency is deduced.\\\\
 \textbf{Current Solutions/Alternatives:} Many implementations can be found on websites such as Github.\\\\
-\textbf{Desired End Product:} A fully functional AI that implements a probabilistic approach along with calculated guessing. \\\\
+\textbf{Current Solutions/Alternatives::} 
+    \begin{enumerate}
+        \item Meuffels, W.J.M. and den Hertog, D., 2010. Puzzle—Solving the Battleship puzzle as an integer programming problem. informs Transactions on Education, 10(3), pp.156-162.
+        \item Port, A.C. and Yampolskiy, R.V., 2012, July. Using a GA and Wisdom of Artificial Crowds to solve solitaire battleship puzzles. In Computer Games (CGAMES), 2012 17th International Conference on (pp. 25-29). IEEE.
+    \end{enumerate}
+    
+\textbf{Desired End Product:}  The prototype should utilizes three different algorithms to solve the Battleships problem. It should have the capabilities to record every move to a database for further analysis. \\\\\\\\\\\\\\\\\\
+    
 \textbf{TimeFrame:}
 \begin{table}[h]
     \begin{tabular}{l|l}
     \textbf{Task}                  & \textbf{Deadline}     \\ \hline
     Literature Review     & Mid March    \\
     Prototype Development & End of April \\
-    Data Analysis         & Mid May \\
-    Write-up              & End of May   \\
+    Data Analysis         & Mid of May \\
+    Write-up              & Near End of May \\
+    Submission            & Beginning of June   \\
     \end{tabular}
     \centering
     \label{tab:schedule}
     \caption{Schedule}
 \end{table}
-
+\\\\
 \textbf{Research Method} 
 \begin{enumerate}
 	\item Develop a console application that has the functions of a Battleship game with the ability to simulate a set number of games and output the data gathered.

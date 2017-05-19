@@ -12,15 +12,11 @@ namespace Battleships.Algorithms
     class HuntTargetAI : AI
     {
         private List<Coordinates> TargetCoords { get; set; }
-        private Orientation TargetOrientation { get; set; }
-        private DirectionTaken TargetDirection { get; set; }
         private List<Coordinates> PossibleTargets { get; set; }
 
         public HuntTargetAI(Board board, Guid guid, Random rand):base(board,guid, rand)
         {
             init();
-            TargetOrientation = Orientation.Random;
-            TargetDirection = DirectionTaken.Random;
             TargetCoords = new List<Coordinates>();
             PossibleTargets = new List<Coordinates>();
         }
@@ -53,16 +49,18 @@ namespace Battleships.Algorithms
                         {
                             isHunting = true;
                             ShipsDestroyed++;
-                            TargetDirection = DirectionTaken.Random;
-                            TargetOrientation = Orientation.Random;
                             PossibleTargets.Clear();
                             TargetCoords.Clear();
                         }
                     }
                 }
 
-                Shots.Add(result);
-                ShotNumber++;
+
+                if(result.ShotTypeId != (int)ShotType.Duplicate)
+                {
+                    Shots.Add(result);
+                    ShotNumber++;
+                }
             }
 
             return Shots;
@@ -96,7 +94,7 @@ namespace Battleships.Algorithms
 
             foreach (Coordinates crd in TargetCoords)
             {
-                PossibleTargets.AddRange(GetAdjacentTargets(crd, TargetOrientation, TargetDirection));
+                PossibleTargets.AddRange(GetAdjacentTargets(crd, Orientation.Random, DirectionTaken.Random));
             }
 
             int randomIndex = GenerateRandom(0, PossibleTargets.Count);
@@ -105,22 +103,11 @@ namespace Battleships.Algorithms
             result.ShotId = Guid.NewGuid();
             result.GameId = GameGuid;
             result.AIState = (int)State.Target;
-            result.DirectionId = (int)TargetOrientation;
+            result.DirectionId = (int)DirectionTaken.Random;
             result.X = PossibleTargets[randomIndex].X;
             result.Y = PossibleTargets[randomIndex].Y;
-            result.OrientationId = (int)TargetOrientation;
+            result.OrientationId = (int)Orientation.Random;
             result.ShotNumber = ShotNumber;
-
-            if (TargetOrientation == Orientation.Random && result.ShotTypeId == (int)ShotType.Hit)
-            {
-                TargetOrientation = FindOrientation(TargetCoords[0], PossibleTargets[randomIndex]);
-            }
-            else if (TargetOrientation != Orientation.Random && result.ShotTypeId == (int)ShotType.Missed)
-            {
-                TargetDirection = GetOppositeDirection(FindDirection(TargetOrientation, TargetCoords[0], new Coordinates { X = result.X, Y = result.Y }));
-            }
-
-
             return result;
         }
         

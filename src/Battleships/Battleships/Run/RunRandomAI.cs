@@ -16,7 +16,7 @@ namespace Battleships.Test
 {
     class RunRandomAI
     {
-        public static void Run(int size, int iterations, string simDesc, string boardPath)
+        public static void Run(int size, int iterations, string simDesc, string boardPath, bool dbInsert)
         {
             Statistics stats = new Statistics(new Simulation() {SimulationId = Guid.NewGuid(), Description = simDesc, SimulationDate = DateTime.Now, AIType = (int)AIType.Random});
 
@@ -39,7 +39,8 @@ namespace Battleships.Test
                    // Display.Grid(board);
                 }
 
-                DbInsert.Insert(stats);
+                if(dbInsert)
+                    DbInsert.Insert(stats);
                 Console.WriteLine("Done");
 
             }

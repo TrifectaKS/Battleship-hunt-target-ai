@@ -15,7 +15,7 @@ namespace Battleships.Run
 {
     class RunHuntTargetAI
     {
-        public static void Run(int size, int iterations, string simDesc, string boardPath)
+        public static void Run(int size, int iterations, string simDesc, string boardPath, bool dbInsert)
         {
             Statistics stats = new Statistics(new Simulation() { SimulationId = Guid.NewGuid(), Description = simDesc, SimulationDate = DateTime.Now, AIType = (int)AIType.Random });
 
@@ -34,10 +34,10 @@ namespace Battleships.Run
                     HuntTargetAI RandAI = new HuntTargetAI(board, game.GameId, random);
                     stats.Shots.AddRange(RandAI.Play());
                     stats.Games.Add(game);
-                    //Display.Grid(board);
                 }
 
-                DbInsert.Insert(stats);
+                if(dbInsert)
+                    DbInsert.Insert(stats);
                 Console.WriteLine("Done");
 
             }

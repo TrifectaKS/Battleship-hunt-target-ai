@@ -10,6 +10,7 @@ namespace Battleships.Enums
     {
         Missed = 0,
         Hit = 1,
-        Destroyed = 2
+        Destroyed = 2,
+        Duplicate = 3
     }
 }

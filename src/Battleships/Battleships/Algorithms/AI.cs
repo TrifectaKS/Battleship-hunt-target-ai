@@ -156,7 +156,7 @@ namespace Battleships.Algorithms
             ShotsAvailable.RemoveAt(index);
             return num;
         }
-
+        
         internal int GenerateRandom(int min, int max)
         {
             return Rand.Next(min, max);

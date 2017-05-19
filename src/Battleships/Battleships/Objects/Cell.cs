@@ -22,6 +22,11 @@ namespace Battleships.Objects
         public bool IsHit { get; set; }
         public Shot Shoot()
         {
+            if (IsShot)
+            {
+                return new Shot { ShotTypeId = (int)ShotType.Duplicate, ShipTypeId = Ship.SEA };
+            }
+
             if (Ship == null)
             {
                 IsShot = true;
