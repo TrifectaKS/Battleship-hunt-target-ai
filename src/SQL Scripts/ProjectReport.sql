@@ -1,5 +1,6 @@
 use [BattleshipDB]
 
+set nocount on
 delete from [dbo].[Shots]
 delete from [dbo].[Games]
 delete from [dbo].[Simulations]
@@ -35,7 +36,7 @@ where	sht.ShotTypeId = 1
 order by sim.SimulationId, gme.GameNumber, sht.ShotNumber
 
 -- Number of shots per game per simulation
-select sim.SimulationId, gme.GameNumber, Count(sht.GameId)
+select sim.SimulationId, gme.GameNumber, Count(sht.GameId) as 'Shout Count'
 from	[dbo].[Simulations] sim
 		join [dbo].[Games] gme
 		on (gme.SimulationId = sim.SimulationId)
@@ -70,8 +71,8 @@ from	dbo.Simulations sim
 group by cast(sim.[Description] as varchar(100))
 
 
---Median
-select tbl.simid, tbl.simdesc, tbl.shotsnum, Count(tbl.shotsnum) as 'occurances'
+--
+select tbl.simdesc, tbl.shotsnum, Count(tbl.shotsnum) as 'occurances'
 from(
 select sim.SimulationId as simid, cast(sim.[Description] as varchar(100)) as simdesc, gme.GameNumber as gamenum, Count(sht.GameId) as shotsnum
 from	[dbo].[Simulations] sim
@@ -82,5 +83,5 @@ from	[dbo].[Simulations] sim
 group by sht.GameId, gme.GameNumber, sim.SimulationId, cast(sim.[Description] as varchar(100))
 --order by sim.SimulationId, gme.GameNumber
 ) tbl
-group by tbl.shotsnum, tbl.simdesc, tbl.simid
-order by 1,4
+group by tbl.shotsnum, tbl.simdesc
+order by 1,3
