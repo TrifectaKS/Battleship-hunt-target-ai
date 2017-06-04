@@ -33,6 +33,7 @@ namespace Battleships.Algorithms
             
             while (ShipsDestroyed != Ship.NUM_OF_SHIPS)
             {
+                Display.Grid(Board); //DISPLAY PURPOSE
                 if (isHunting)
                 {
                     result = Hunt();
@@ -68,6 +69,7 @@ namespace Battleships.Algorithms
                     ShotNumber++;
                 }
             }
+            Console.WriteLine("----------------"); //Display Purpose
 
             return Shots;
         }

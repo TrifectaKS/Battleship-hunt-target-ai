@@ -36,10 +36,13 @@ namespace Battleships.Algorithms
         {
             while (ShipsDestroyed != Ship.NUM_OF_SHIPS)
             {
+
+                Display.Grid(Board); //DISPLAY PURPOSE
                 ShotNumber++;
 
                 Shots.Add(Shoot());
             }
+            Console.WriteLine("----------------"); //Display Purpose
 
             return Shots;
         }
