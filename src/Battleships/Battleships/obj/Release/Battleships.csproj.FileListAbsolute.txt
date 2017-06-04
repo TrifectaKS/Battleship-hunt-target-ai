@@ -1,0 +1,12 @@
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Release\Battleships.exe.config
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Release\Grids\Grid1.txt
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Release\Battleships.exe
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Release\Battleships.pdb
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Release\EntityFramework.dll
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Release\Z.EntityFramework.Extensions.dll
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Release\EntityFramework.xml
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\obj\Release\Battleships.csprojResolveAssemblyReference.cache
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\obj\Release\Battleships.exe
+C:\Users\Kim\Documents\iict6098-2016-sb-sciclunakim\src\Battleships\Battleships\obj\Release\Battleships.pdb
