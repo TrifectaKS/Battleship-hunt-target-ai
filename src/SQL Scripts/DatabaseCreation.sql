@@ -180,5 +180,5 @@
 	order by gameid, shotnumber asc
 	
 	delete from [dbo].[simulations]
-	delete from [dbo].[games]
 	delete from [dbo].[shots]
+	delete from [dbo].[games]

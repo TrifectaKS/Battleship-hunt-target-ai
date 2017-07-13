@@ -38,6 +38,7 @@ namespace Battleships.Run
 
                 if(dbInsert)
                     DbInsert.Insert(stats);
+
                 Console.WriteLine("Done");
 
             }
